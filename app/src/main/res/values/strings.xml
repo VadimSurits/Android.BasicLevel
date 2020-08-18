@@ -1,5 +1,20 @@
 <resources>
-    <string name="app_name">VS Weather Application</string>
+    <string name="app_name">VS Weather App</string>
     <string name="cityName">Khabarovsk</string>
     <string name="temperature">Undefined</string>
+    <string name="buttonChangeCity">Change city</string>
+    <string name="buttonSettings">Settings</string>
+    <string name="cityChoice">Choose your city</string>
+    <string name="InputCityName">Input city name</string>
+    <string name="buttonMoscow">Moscow</string>
+    <string name="buttonSpb">Saint-Petersburg</string>
+    <string name="buttonEkaterinburg">Ekaterinburg</string>
+    <string name="buttonNovosibirsk">Novosibirsk</string>
+    <string name="buttonKhabarovsk">Khabarovsk</string>
+    <string name="checkBoxWindSpeed">Wind speed</string>
+    <string name="checkBoxPressure">Pressure</string>
+    <string name="Settings">Settings</string>
+
+
+
 </resources>

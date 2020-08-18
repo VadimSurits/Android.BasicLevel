@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">VS Погодное приложение</string>
+    <string name="app_name">VS Погода</string>
     <string name="cityName">Хабаровск</string>
     <string name="temperature">Не определена</string>
+    <string name="buttonChangeCity">Сменить город</string>
+    <string name="buttonSettings">Настройки</string>
+    <string name="cityChoice">Выберите ваш город</string>
+    <string name="InputCityName">Введите название города</string>
+    <string name="buttonMoscow">Москва</string>
+    <string name="buttonSpb">Санкт-Петербург</string>
+    <string name="buttonEkaterinburg">Екатеринбург</string>
+    <string name="buttonNovosibirsk">Новосибирск</string>
+    <string name="buttonKhabarovsk">Хабаровск</string>
+    <string name="checkBoxWindSpeed">Скорость ветра</string>
+    <string name="checkBoxPressure">Давление</string>
+    <string name="Settings">Настройки</string>
+
 </resources>
