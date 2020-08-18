@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Android.BasicLevel</string>
+    <string name="app_name">VS Weather Application</string>
+    <string name="cityName">Khabarovsk</string>
+    <string name="temperature">Undefined</string>
 </resources>

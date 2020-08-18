@@ -8,32 +8,34 @@
 
 
     <ImageView
+        android:id="@+id/imageTop"
+        android:layout_width="738dp"
+        android:layout_height="73dp"
+        android:scaleType="center"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@android:color/holo_purple" />
+
+    <ImageView
         android:id="@+id/mainImage"
-        android:layout_width="414dp"
-        android:layout_height="732dp"
+        android:layout_width="282dp"
+        android:layout_height="281dp"
         android:scaleType="fitCenter"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.532"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <ImageView
-        android:id="@+id/imageTop"
-        android:layout_width="412dp"
-        android:layout_height="160dp"
-        android:scaleType="center"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@android:color/holo_purple" />
-
-    <ImageView
         android:id="@+id/imageBottom"
-        android:layout_width="411dp"
-        android:layout_height="165dp"
+        android:layout_width="734dp"
+        android:layout_height="62dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,10 +56,9 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029999971"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="App name" />
 
     <TextView
@@ -65,7 +66,7 @@
         android:layout_width="207dp"
         android:layout_height="41dp"
         android:layout_marginTop="120dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="260dp"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="25sp"
@@ -73,6 +74,7 @@
         app:layout_constraintBottom_toTopOf="@+id/mainImage"
         app:layout_constraintEnd_toStartOf="@+id/temperature"
         app:layout_constraintTop_toBottomOf="@+id/imageTop"
+        app:layout_constraintVertical_bias="0.854"
         tools:text="city name" />
 
     <TextView
@@ -80,6 +82,7 @@
         android:layout_width="203dp"
         android:layout_height="39dp"
         android:layout_marginTop="120dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="2dp"
         android:textAlignment="center"
         android:textColor="@android:color/black"
@@ -88,6 +91,7 @@
         app:layout_constraintBottom_toTopOf="@+id/mainImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageTop"
+        app:layout_constraintVertical_bias="0.848"
         tools:text="temperature" />
 
 
