@@ -4,95 +4,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#5A6BCD"><![CDATA[
     tools:context=".MainActivity">
 
-
-    <ImageView
-        android:id="@+id/imageTop"
-        android:layout_width="738dp"
-        android:layout_height="73dp"
-        android:scaleType="center"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@android:color/holo_purple" />
+    ]]>
 
     <ImageView
         android:id="@+id/mainImage"
-        android:layout_width="282dp"
-        android:layout_height="281dp"
-        android:scaleType="fitCenter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="TODO"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532"
-        app:srcCompat="@mipmap/ic_launcher_round" />
-
-    <ImageView
-        android:id="@+id/imageBottom"
-        android:layout_width="734dp"
-        android:layout_height="62dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@android:color/holo_purple" />
+        app:layout_constraintTop_toBottomOf="@id/appTitle"
+        app:srcCompat="@drawable/ic_baseline_wb_sunny_24"
+        tools:srcCompat="@drawable/ic_baseline_wb_sunny_24" />
 
     <TextView
-        android:id="@+id/mainTitle"
-        android:layout_width="301dp"
-        android:layout_height="60dp"
-        android:fontFamily="casual"
+        android:id="@+id/appTitle"
+        android:layout_width="402dp"
+        android:layout_height="78dp"
+        android:gravity="center"
         android:text="@string/app_name"
         android:textAlignment="center"
-        android:textColor="@android:color/primary_text_dark_nodisable"
-        android:textSize="42sp"
+        android:textColor="#19D584"
+        android:textColorHighlight="#00BCD4"
+        android:textSize="40sp"
         android:textStyle="bold"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mainImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="App name" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cityName"
-        android:layout_width="207dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="260dp"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:paddingTop="30dp"
+        android:text="@string/cityName"
+        android:textColor="#FF9800"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/mainImage"
-        app:layout_constraintEnd_toStartOf="@+id/temperature"
-        app:layout_constraintTop_toBottomOf="@+id/imageTop"
-        app:layout_constraintVertical_bias="0.854"
-        tools:text="city name" />
+        app:layout_constraintEnd_toStartOf="@id/guideline3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
     <TextView
         android:id="@+id/temperature"
-        android:layout_width="203dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="2dp"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:paddingTop="30dp"
+        android:text="@string/temperature"
+        android:textColor="#FF9800"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/mainImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageTop"
-        app:layout_constraintVertical_bias="0.848"
-        tools:text="temperature" />
+        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/buttonChangeCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:onClick="launchActivityCityChoice"
+        android:text="@string/buttonChangeCity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:onClick="launchSettingsActivity"
+        android:text="@string/buttonSettings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonChangeCity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
