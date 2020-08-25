@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">VS Weather App</string>
-    <string name="cityName">Khabarovsk</string>
+    <string name="cityName">City ?</string>
     <string name="temperature">Undefined</string>
     <string name="buttonChangeCity">Change city</string>
+    <string name="buttonInfoAboutCity">Wikipedia about city</string>
     <string name="buttonSettings">Settings</string>
     <string name="cityChoice">Choose your city</string>
     <string name="InputCityName">Input city name</string>
