@@ -14,7 +14,7 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.537"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appTitle"
             app:srcCompat="@drawable/ic_baseline_wb_sunny_24"
@@ -66,6 +66,36 @@
             app:layout_constraintStart_toEndOf="@id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
+        <TextView
+            android:id="@+id/windSpeed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:textAlignment="center"
+            android:textColor="#00BCD4"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityName" />
+
+        <TextView
+            android:id="@+id/pressure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:textAlignment="center"
+            android:textColor="#00BCD4"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/windSpeed"
+            app:layout_constraintTop_toBottomOf="@+id/temperature" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
             android:layout_width="wrap_content"
@@ -85,6 +115,18 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
+            android:id="@+id/buttonInfoaboutCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:text="@string/buttonInfoAboutCity"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonChangeCity"
+            app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
+            app:layout_constraintStart_toEndOf="@+id/buttonChangeCity"
+            app:layout_constraintTop_toTopOf="@+id/buttonChangeCity" />
+
+        <Button
             android:id="@+id/buttonSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,4 +137,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/buttonChangeCity" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

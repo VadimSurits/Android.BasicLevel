@@ -31,8 +31,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle saveIS){
-        super.onRestoreInstanceState(saveIS);
+    protected void onRestoreInstanceState(Bundle saveInstanceState){
+        super.onRestoreInstanceState(saveInstanceState);
         Toast.makeText(getApplicationContext(), "Повторный запуск SettingsActivity - onRestoreInstanceState()", Toast.LENGTH_SHORT).show();
         Log.d("SettingsActivity", " Повторный запуск SettingsActivity - onRestoreInstanceState()");
     }
@@ -52,8 +52,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle saveIS){
-        super.onSaveInstanceState(saveIS);
+    protected void onSaveInstanceState(Bundle saveInstanceState){
+        super.onSaveInstanceState(saveInstanceState);
         Toast.makeText(getApplicationContext(), " SettingsActivity - onSaveInstanceState()", Toast.LENGTH_SHORT).show();
         Log.d("SettingsActivity", " onSaveInstanceState()");
     }

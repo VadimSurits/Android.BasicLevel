@@ -3,25 +3,48 @@ package geekbrains.AndroidBasicLevel;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Constants {
+
+    Uri uri = Uri.parse("http://geekbrains.ru");
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        TextView cityName = findViewById(R.id.cityName);
+        TextView temperature = findViewById(R.id.temperature);
+        TextView windSpeed = findViewById(R.id.windSpeed);
+        TextView pressure = findViewById(R.id.pressure);
+
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                String chosenCity = data.getStringExtra(CityChoiceActivity.CITY);
+                cityName.setText(chosenCity);
+                String receivedWindSpeed = data.getStringExtra(CityChoiceActivity.WIND_SPEED);
+                windSpeed.setText(receivedWindSpeed);
+                String receivedPressure = data.getStringExtra(CityChoiceActivity.PRESSURE);
+                pressure.setText(receivedPressure);
+                temperature.setText("??? градусов");
+                String receivedUri = data.getStringExtra(CityChoiceActivity.URI);
+                uri = Uri.parse(receivedUri);
+            }else {
+                cityName.setText("");
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        final TextView appTitle = findViewById(R.id.appTitle);
-        final TextView cityName = findViewById(R.id.cityName);
-        final TextView temperature = findViewById(R.id.temperature);
-        final ImageView mainImage = findViewById(R.id.mainImage);
 
         String instanceState;
         if(savedInstanceState == null){
@@ -30,16 +53,21 @@ public class MainActivity extends AppCompatActivity {
             instanceState = "Повторный запуск";
         }
 
+        TextView cityName = findViewById(R.id.cityName);
+        TextView temperature = findViewById(R.id.temperature);
+
         cityName.setText(R.string.cityName);
         temperature.setText(R.string.temperature);
 
         Button buttonChangeCity = findViewById(R.id.buttonChangeCity);
         Button buttonSettings = findViewById(R.id.buttonSettings);
+        Button buttonInfoAboutCity = findViewById(R.id.buttonInfoaboutCity);
 
         buttonChangeCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CityChoiceActivity.class));
+                Intent intent = new Intent(MainActivity.this, CityChoiceActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
@@ -49,6 +77,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             }
         });
+
+        buttonInfoAboutCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri.toString()));
+                startActivity(intent);
+            }
+        });
+
 
         Toast.makeText(getApplicationContext(), instanceState + " MainActivity - onCreate()", Toast.LENGTH_SHORT).show();
         Log.d("MainActivity", " onCreate()");
@@ -66,6 +103,16 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(saveIS);
         Toast.makeText(getApplicationContext(), "Повторный запуск MainActivity - onRestoreInstanceState()", Toast.LENGTH_SHORT).show();
         Log.d("MainActivity", " Повторный запуск MainActivity - onRestoreInstanceState())");
+
+        TextView cityName = findViewById(R.id.cityName);
+        TextView temperature = findViewById(R.id.temperature);
+        TextView windSpeed = findViewById(R.id.windSpeed);
+        TextView pressure = findViewById(R.id.pressure);
+        cityName.setText(saveIS.getString("cityName").toString());
+        temperature.setText(saveIS.getString("temperature").toString());
+        windSpeed.setText(saveIS.getString("windSpeed").toString());
+        pressure.setText(saveIS.getString("pressure").toString());
+        uri = Uri.parse(saveIS.getString("URI"));
     }
 
     @Override
@@ -87,6 +134,16 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(saveIS);
         Toast.makeText(getApplicationContext(), " MainActivity - onSaveInstanceState()", Toast.LENGTH_SHORT).show();
         Log.d("MainActivity", " onSaveInstanceState()");
+
+        TextView cityName = findViewById(R.id.cityName);
+        TextView temperature = findViewById(R.id.temperature);
+        TextView windSpeed = findViewById(R.id.windSpeed);
+        TextView pressure = findViewById(R.id.pressure);
+        saveIS.putString("cityName", cityName.getText().toString());
+        saveIS.putString("temperature", temperature.getText().toString());
+        saveIS.putString("windSpeed",windSpeed.getText().toString());
+        saveIS.putString("pressure", pressure.getText().toString());
+        saveIS.putString("URI",uri.toString());
     }
 
     @Override
