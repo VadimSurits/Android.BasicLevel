@@ -16,5 +16,6 @@
     <string name="checkBoxWindSpeed">Скорость ветра</string>
     <string name="checkBoxPressure">Давление</string>
     <string name="Settings">Настройки</string>
+    <string name="buttonBonus">Бонус</string>
 
 </resources>

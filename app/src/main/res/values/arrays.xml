@@ -1,12 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <string-array name="cities">
+        <item>Москва</item>
+        <item>Санкт-Петербург</item>
+        <item>Екатеринбург</item>
+        <item>Новосибирск</item>
+        <item>Хабаровск</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
-    </string-array>
+    <integer-array name="coatofarms_imgs">
+        <item>@drawable/msc</item><!-- герб Москвы -->
+        <item>@drawable/spb</item><!-- герб Санкт-Петербурга -->
+        <item>@drawable/ebrg</item><!-- герб Екатеринбурга -->
+        <item>@drawable/nsk</item><!-- герб Новосибирска -->
+        <item>@drawable/khab</item><!-- герб Хабаровска -->
+    </integer-array>
 </resources>
