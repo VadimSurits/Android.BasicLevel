@@ -1,4 +1,4 @@
-package geekbrains.AndroidBasicLevel;
+package geekbrains.AndroidBasicLevel.Bonus;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import geekbrains.AndroidBasicLevel.R;
 
 // Фрагмент выбора города из списка
 public class CitiesFragment extends Fragment {

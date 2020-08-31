@@ -1,15 +1,13 @@
 package geekbrains.AndroidBasicLevel;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CityChoiceActivity extends AppCompatActivity implements Constants {
 
@@ -28,14 +26,14 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
         Button buttonNovosibirsk = findViewById(R.id.buttonNovosibirsk);
         Button buttonKhabarovsk = findViewById(R.id.buttonKhabarovsk);
 
-        String instanceState;
-        if(saveInstanceState == null){
-            instanceState = "Первый запуск";
-        } else{
-            instanceState = "Повторный запуск";
-        }
-        Toast.makeText(getApplicationContext(), instanceState + " CityChoiceActivity - onCreate()", Toast.LENGTH_SHORT).show();
-        Log.d("CityChoiceActivity", " onCreate()");
+//        String instanceState;
+//        if(saveInstanceState == null){
+//            instanceState = "Первый запуск";
+//        } else{
+//            instanceState = "Повторный запуск";
+//        }
+//        Toast.makeText(getApplicationContext(), instanceState + " CityChoiceActivity - onCreate()", Toast.LENGTH_SHORT).show();
+//        Log.d("CityChoiceActivity", " onCreate()");
 
         buttonMoscow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,57 +150,57 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(getApplicationContext()," CityChoiceActivity - onStart()", Toast.LENGTH_SHORT).show();
-        Log.d("CityChoiceActivity", " onStart()");
+//        Toast.makeText(getApplicationContext()," CityChoiceActivity - onStart()", Toast.LENGTH_SHORT).show();
+//        Log.d("CityChoiceActivity", " onStart()");
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle saveInstanceState){
         super.onRestoreInstanceState(saveInstanceState);
-        Toast.makeText(getApplicationContext(), "Повторный запуск CityChoiceActivity - onRestoreInstanceState()", Toast.LENGTH_SHORT).show();
-        Log.d("CityChoiceActivity", " Повторный запуск CityChoiceActivity - onRestoreInstanceState()");
+//        Toast.makeText(getApplicationContext(), "Повторный запуск CityChoiceActivity - onRestoreInstanceState()", Toast.LENGTH_SHORT).show();
+//        Log.d("CityChoiceActivity", " Повторный запуск CityChoiceActivity - onRestoreInstanceState()");
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onResume()", Toast.LENGTH_SHORT).show();
-        Log.d("CityChoiceActivity", " onResume()");
+//        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onResume()", Toast.LENGTH_SHORT).show();
+//        Log.d("CityChoiceActivity", " onResume()");
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onPause()", Toast.LENGTH_SHORT).show();
-        Log.d("CityChoiceActivity", " onPause()");
+//        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onPause()", Toast.LENGTH_SHORT).show();
+//        Log.d("CityChoiceActivity", " onPause()");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle saveInstanceState) {
         super.onSaveInstanceState(saveInstanceState);
-        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onSaveInstanceState()", Toast.LENGTH_SHORT).show();
-        Log.d("CityChoiceActivity", " onSaveInstanceState()");
+//        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onSaveInstanceState()", Toast.LENGTH_SHORT).show();
+//        Log.d("CityChoiceActivity", " onSaveInstanceState()");
     }
 
 
     @Override
     protected void onStop(){
         super.onStop();
-        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onStop()", Toast.LENGTH_SHORT).show();
-        Log.d("CityChoiceActivity", " onStop()");
+//        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onStop()", Toast.LENGTH_SHORT).show();
+//        Log.d("CityChoiceActivity", " onStop()");
     }
 
     @Override
     protected void onRestart(){
         super.onRestart();
-        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onRestart()", Toast.LENGTH_SHORT).show();
-        Log.d("CityChoiceActivity", " onRestart()");
+//        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onRestart()", Toast.LENGTH_SHORT).show();
+//        Log.d("CityChoiceActivity", " onRestart()");
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onDestroy()", Toast.LENGTH_SHORT).show();
-        Log.d("CityChoiceActivity", " onDestroy()");
+//        Toast.makeText(getApplicationContext(), " CityChoiceActivity - onDestroy()", Toast.LENGTH_SHORT).show();
+//        Log.d("CityChoiceActivity", " onDestroy()");
     }
 }
