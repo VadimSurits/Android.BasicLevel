@@ -1,10 +1,13 @@
 package geekbrains.AndroidBasicLevel;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -21,6 +24,18 @@ public class SettingsActivity extends AppCompatActivity {
         }
         Toast.makeText(getApplicationContext(), instanceState + " SettingsActivity - onCreate()", Toast.LENGTH_SHORT).show();
         Log.d("SettingsActivity", " onCreate()");
+
+
+        Button buttonBonus = findViewById(R.id.buttonBonus);
+
+        buttonBonus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SettingsActivity.this, BonusActivity1.class));
+            }
+        });
+
+
     }
 
     @Override
