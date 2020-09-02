@@ -8,7 +8,7 @@ android:layout_height="match_parent">
 <!-- в портретной ориентации у activity только один фрагмент -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <fragment android:name="geekbrains.AndroidBasicLevel.CitiesFragment"
+    <fragment android:name="geekbrains.AndroidBasicLevel.Bonus.CitiesFragment"
         android:id="@+id/cities"
         android:layout_width="match_parent" android:layout_height="match_parent" />
 </FrameLayout>

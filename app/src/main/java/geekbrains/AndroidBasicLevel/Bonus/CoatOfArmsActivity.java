@@ -1,8 +1,10 @@
-package geekbrains.AndroidBasicLevel;
+package geekbrains.AndroidBasicLevel.Bonus;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import geekbrains.AndroidBasicLevel.R;
 
 
 // Эта activity для показа герба в портретной ориентации
@@ -26,7 +28,7 @@ public class CoatOfArmsActivity extends AppCompatActivity {
             // Добавим фрагмент на activity
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, details).commit();
+                    .replace(R.id.fragmentCOA_container, details).commit();
         }
     }
 }

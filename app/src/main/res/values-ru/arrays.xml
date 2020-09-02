@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="cities">
-        <item>Moscow</item>
-        <item>Saint-Petersburg</item>
-        <item>Ekaterinburg</item>
-        <item>Novosibirsk</item>
-        <item>Khabarovsk</item>
+        <item>Москва</item>
+        <item>Санкт-Петербург</item>
+        <item>Екатеринбург</item>
+        <item>Новосибирск</item>
+        <item>Хабаровск</item>
     </string-array>
 
     <string-array name="forecastDays">
-        <item>Today</item>
-        <item>Tomorrow</item>
-        <item>In 2 days</item>
-        <item>In 3 days</item>
-        <item>In 4 days</item>
-        <item>In 5 days</item>
+        <item>Сегодня</item>
+        <item>Завтра</item>
+        <item>Через 2 дня</item>
+        <item>Через 3 дня</item>
+        <item>Через 4 дня</item>
+        <item>Через 5 дней</item>
     </string-array>
 
     <integer-array name="coatofarms_imgs">
