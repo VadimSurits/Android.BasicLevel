@@ -28,8 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:lines="5"
-        android:textSize="25sp"
+
+        android:textSize="20sp"
         android:text="Какой-то прогноз погоды! Очень странно, что этот текст одновременно и скроллится, и остается на экране как в обычном TextView"
         android:textAlignment="center"
         android:textColor="#F44336"

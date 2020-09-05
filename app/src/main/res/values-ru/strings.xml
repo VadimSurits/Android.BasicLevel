@@ -17,5 +17,12 @@
     <string name="checkBoxPressure">Давление</string>
     <string name="Settings">Настройки</string>
     <string name="buttonBonus">Бонус</string>
-
+    <string name="UriMoscow">https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0</string>
+    <string name="UriSpb">https://ru.wikipedia.org/wiki/%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3</string>
+    <string name="UriEkaterinburg">https://ru.wikipedia.org/wiki/%D0%95%D0%BA%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%BD%D0%B1%D1%83%D1%80%D0%B3</string>
+    <string name="UriNovosibirsk">https://ru.wikipedia.org/wiki/%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%B8%D0%B1%D0%B8%D1%80%D1%81%D0%BA</string>
+    <string name="UriKhabarovsk">https://ru.wikipedia.org/wiki/%D0%A5%D0%B0%D0%B1%D0%B0%D1%80%D0%BE%D0%B2%D1%81%D0%BA</string>
+    <string name="aboutDeveloper">Инфо о разработчике</string>
+    <string name="title_main">Главный экран</string>
+    <string name="title_settings">Настройки</string>
 </resources>

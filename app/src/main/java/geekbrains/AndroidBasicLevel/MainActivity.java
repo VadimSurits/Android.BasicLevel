@@ -4,15 +4,20 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private RecyclerView recyclerView;
     private RecyclerDataAdapter recyclerDataAdapter;
     private List<String> forecastDays = new ArrayList<>();
+
+    private Toolbar toolbar;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -47,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
                 String receivedUri = data.getStringExtra(CityChoiceActivity.URI);
                 uri = Uri.parse(receivedUri);
             }else {
-                cityName.setText("");
+                cityName.setText("Город не выбран");
             }
         }
     }
@@ -57,12 +64,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        String instanceState;
-//        if(savedInstanceState == null){
-//            instanceState = "Первый запуск";
-//        } else{
-//            instanceState = "Повторный запуск";
-//        }
+        toolbar = findViewById(R.id.AppBarToolbar);
+        setSupportActionBar(toolbar);
 
         TextView cityName = findViewById(R.id.cityName);
         TextView temperature = findViewById(R.id.temperature);
@@ -102,9 +105,6 @@ public class MainActivity extends AppCompatActivity implements Constants {
         fragmentTransaction.replace(R.id.fragmentContainer1, fragmentTemperatureHistory);
         fragmentTransaction.commit();
 
-//        Toast.makeText(getApplicationContext(), instanceState + " MainActivity - onCreate()", Toast.LENGTH_SHORT).show();
-//        Log.d("MainActivity", " onCreate()");
-
         recyclerView = findViewById(R.id.recycler_view_Fragment);
         forecastDays = Arrays.asList(getResources().getStringArray(R.array.forecastDays));
         recyclerDataAdapter = new RecyclerDataAdapter(forecastDays);
@@ -115,8 +115,6 @@ public class MainActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onStart() {
         super.onStart();
-//        Toast.makeText(getApplicationContext()," MainActivity - onStart()", Toast.LENGTH_SHORT).show();
-//        Log.d("MainActivity", " onStart()");
     }
 
     @Override
@@ -139,22 +137,16 @@ public class MainActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onResume(){
         super.onResume();
-//        Toast.makeText(getApplicationContext(), " MainActivity - onResume()", Toast.LENGTH_SHORT).show();
-//        Log.d("MainActivity", " onResume()");
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-//        Toast.makeText(getApplicationContext(), " MainActivity - onPause()", Toast.LENGTH_SHORT).show();
-//        Log.d("MainActivity", " onPause()");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle saveIS){
         super.onSaveInstanceState(saveIS);
-//        Toast.makeText(getApplicationContext(), " MainActivity - onSaveInstanceState()", Toast.LENGTH_SHORT).show();
-//        Log.d("MainActivity", " onSaveInstanceState()");
 
         TextView cityName = findViewById(R.id.cityName);
         TextView temperature = findViewById(R.id.temperature);
@@ -170,21 +162,41 @@ public class MainActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onStop(){
         super.onStop();
-//        Toast.makeText(getApplicationContext(), " MainActivity - onStop()", Toast.LENGTH_SHORT).show();
-//        Log.d("MainActivity", " onStop()");
     }
 
     @Override
     protected void onRestart(){
         super.onRestart();
-//        Toast.makeText(getApplicationContext(), " MainActivity - onRestart()", Toast.LENGTH_SHORT).show();
-//        Log.d("MainActivity", " onRestart()");
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
-//        Toast.makeText(getApplicationContext(), " MainActivity - onDestroy()", Toast.LENGTH_SHORT).show();
-//        Log.d("MainActivity", " onDestroy()");
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // разместить меню в action bar
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Управление касаниями на action bar.
+        int id = item.getItemId();
+
+        if(id == R.id.aboutDeveloper){
+            Snackbar.make(toolbar, "Разработчик еще учится", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Закрыть окно", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                        }
+                    }).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

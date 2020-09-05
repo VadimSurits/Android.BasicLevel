@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     android:background="#5A6BCD">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width= "match_parent"
+            android:layout_height= "wrap_content"
+            android:id="@+id/AppBarLayout"
+            android:theme= "@style/AppTheme.AppBarOverlay"
+            tools:ignore="MissingConstraints">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id= "@+id/AppBarToolbar"
+                    android:layout_width= "match_parent"
+                    android:layout_height= "?attr/actionBarSize"
+                    android:background= "?attr/colorPrimary"
+                    app:popupTheme= "@style/AppTheme.PopupOverlay" />
+        </com.google.android.material.appbar.AppBarLayout >
+
+
         <ImageView
             android:id="@+id/mainImage"
             android:layout_width="0dp"
@@ -34,7 +50,7 @@
             app:layout_constraintBottom_toTopOf="@+id/mainImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/AppBarLayout"/>
 
         <TextView
             android:id="@+id/cityName"
@@ -122,7 +138,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonChangeCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,7 +149,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonInfoaboutCity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -145,7 +161,7 @@
             app:layout_constraintStart_toEndOf="@+id/buttonChangeCity"
             app:layout_constraintTop_toTopOf="@+id/buttonChangeCity" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

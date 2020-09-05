@@ -57,49 +57,55 @@
         app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
 
-    <EditText
-        android:id="@+id/editCityName"
-        android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editCityNameLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="30dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/InputCityName"
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textColorHint="#CDDC39"
-        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/cityChoice"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cityChoice" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <Button
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editCityName"
+            app:layout_constraintTop_toBottomOf="@id/cityChoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/InputCityName"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:textColorHint="#CDDC39"
+            android:textSize="25sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonMoscow"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="244dp"
         android:text="@string/buttonMoscow"
-        app:layout_constraintEnd_toEndOf="@+id/editCityName"
+        app:layout_constraintEnd_toEndOf="@+id/editCityNameLayout"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editCityName"
-        app:layout_constraintTop_toBottomOf="@+id/editCityName" />
+        app:layout_constraintStart_toStartOf="@+id/editCityNameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/editCityNameLayout" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSpb"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="244dp"
         android:text="@string/buttonSpb"
-        app:layout_constraintEnd_toEndOf="@+id/editCityName"
+        app:layout_constraintEnd_toEndOf="@+id/editCityNameLayout"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editCityName"
+        app:layout_constraintStart_toStartOf="@+id/editCityNameLayout"
         app:layout_constraintTop_toBottomOf="@+id/buttonMoscow" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonEkaterinburg"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -108,10 +114,10 @@
         android:text="@string/buttonEkaterinburg"
         app:layout_constraintEnd_toEndOf="@id/buttonSpb"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editCityName"
+        app:layout_constraintStart_toStartOf="@+id/editCityNameLayout"
         app:layout_constraintTop_toBottomOf="@+id/buttonSpb" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonNovosibirsk"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -120,10 +126,10 @@
         android:text="@string/buttonNovosibirsk"
         app:layout_constraintEnd_toEndOf="@id/buttonSpb"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editCityName"
+        app:layout_constraintStart_toStartOf="@+id/editCityNameLayout"
         app:layout_constraintTop_toBottomOf="@+id/buttonEkaterinburg" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonKhabarovsk"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -134,7 +140,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/buttonSpb"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editCityName"
+        app:layout_constraintStart_toStartOf="@+id/editCityNameLayout"
         app:layout_constraintTop_toBottomOf="@+id/buttonNovosibirsk" />
 
     <CheckBox
@@ -148,7 +154,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCityName" />
+        app:layout_constraintTop_toBottomOf="@+id/editCityNameLayout" />
 
     <CheckBox
         android:id="@+id/checkBoxPressure"
@@ -160,7 +166,7 @@
         android:textColor="#FF9800"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCityName" />
+        app:layout_constraintTop_toBottomOf="@+id/editCityNameLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

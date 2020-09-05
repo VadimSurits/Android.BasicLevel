@@ -2,19 +2,61 @@ package geekbrains.AndroidBasicLevel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import geekbrains.AndroidBasicLevel.Bonus.BonusActivity1;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    private View v;
+    //Добавляем BottomBar
+    private TextView mTextMessage;
+    private BottomNavigationView.OnNavigationItemSelectedListener
+            mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_main:
+                    mTextMessage.setText(R.string.title_main);
+                    startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                    return true;
+                case R.id.navigation_aboutDevelopers:
+                    mTextMessage.setText(R.string.aboutDeveloper);
+                    Snackbar.make(v, "Разработчик еще учится", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Закрыть окно", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                }
+                            }).show();
+                    return true;
+                case R.id.navigation_settings:
+                    mTextMessage.setText(R.string.title_settings);
+                    return true;
+            }
+            return false;
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        mTextMessage = findViewById(R.id.message );
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        v = findViewById(R.id.settingsActivity); //создал view для Snackbar
 
 //        String instanceState;
 //        if(savedInstanceState == null){
@@ -34,8 +76,6 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(new Intent(SettingsActivity.this, BonusActivity1.class));
             }
         });
-
-
     }
 
     @Override
