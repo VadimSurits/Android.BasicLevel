@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">VS Weather App</string>
-    <string name="cityName">City ?</string>
-    <string name="temperature">Undefined</string>
+    <string name="cityName">City</string>
+    <string name="temperature">Temperature</string>
     <string name="buttonChangeCity">Change city</string>
     <string name="buttonInfoAboutCity">Wikipedia about city</string>
     <string name="buttonSettings">Settings</string>
