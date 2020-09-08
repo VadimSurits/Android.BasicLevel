@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">VS Погода</string>
-    <string name="cityName">Город ?</string>
-    <string name="temperature">Не определена</string>
+    <string name="cityName">Город</string>
+    <string name="temperature">Температура</string>
     <string name="buttonChangeCity">Сменить город</string>
     <string name="buttonInfoAboutCity">Википедия о городе</string>
     <string name="buttonSettings">Настройки</string>
