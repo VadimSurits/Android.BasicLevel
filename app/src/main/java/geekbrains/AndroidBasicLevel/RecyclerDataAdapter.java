@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapter.ViewHolder> {
-    private List<String> data;
+    private List<String> data1;
+    private List<String> data2;
 
-    public RecyclerDataAdapter(List<String> data) {
-        this.data = data;
+    public RecyclerDataAdapter(List<String> data1, List<String> data2) {
+        this.data1 = data1;
+        this.data2 = data2;
         notifyDataSetChanged();
     }
 
@@ -28,25 +30,23 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setTextToTextView(data.get(position));
+        holder.textViewForecastDays.setText(data1.get(position));
+        holder.textViewForecastDescription.setText(data2.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return data == null ? 0 : data.size();
+        return data1 == null ? 0 : data1.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView textView;
+        private TextView textViewForecastDays;
+        private TextView textViewForecastDescription;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
-            textView = itemView.findViewById(R.id.ForecastDaysTextView);
+            textViewForecastDays = itemView.findViewById(R.id.ForecastDaysTextView);
+            textViewForecastDescription = itemView.findViewById(R.id.ForecastDescriptionTextView);
         }
-
-        public void setTextToTextView(String text){
-            textView.setText(text);
-        }
-
     }
 }

@@ -17,6 +17,15 @@
         <item>Через 5 дней</item>
     </string-array>
 
+    <string-array name="forecastDescriptions">
+        <item>Какой-то прогноз погоды1</item>
+        <item>Какой-то прогноз погоды2</item>
+        <item>Какой-то прогноз погоды3</item>
+        <item>Какой-то прогноз погоды4</item>
+        <item>Какой-то прогноз погоды5</item>
+        <item>Какой-то прогноз погоды6</item>
+    </string-array>
+
     <integer-array name="coatofarms_imgs">
         <item>@drawable/msc</item><!-- герб Москвы -->
         <item>@drawable/spb</item><!-- герб Санкт-Петербурга -->
