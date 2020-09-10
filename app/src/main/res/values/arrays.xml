@@ -17,6 +17,16 @@
         <item>In 5 days</item>
     </string-array>
 
+    <string-array name="forecastDescriptions">
+        <item>Some forecast descrription1</item>
+        <item>Some forecast descrription2</item>
+        <item>Some forecast descrription3</item>
+        <item>Some forecast descrription4</item>
+        <item>Some forecast descrription5</item>
+        <item>Some forecast descrription6</item>
+    </string-array>
+
+
     <integer-array name="coatofarms_imgs">
         <item>@drawable/msc</item><!-- герб Москвы -->
         <item>@drawable/spb</item><!-- герб Санкт-Петербурга -->

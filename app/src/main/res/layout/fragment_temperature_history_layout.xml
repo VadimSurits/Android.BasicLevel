@@ -10,6 +10,7 @@
         android:id="@+id/ForecastDaysTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/fragment_temperature_history"
         android:paddingStart="16dp"
         android:paddingTop="8dp"
         android:paddingEnd="16dp"
@@ -19,7 +20,6 @@
         android:textSize="30sp"
         android:textStyle="bold"
         tools:text="someText"
-        tools:ignore="MissingConstraints"
         />
 
     <TextView
@@ -28,13 +28,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
-
         android:textSize="20sp"
-        android:text="Какой-то прогноз погоды! Очень странно, что этот текст одновременно и скроллится, и остается на экране как в обычном TextView"
+        tools:text="some forecast"
         android:textAlignment="center"
         android:textColor="#F44336"
         app:layout_constraintTop_toBottomOf="@+id/ForecastDaysTextView"
         app:layout_goneMarginEnd="8dp"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

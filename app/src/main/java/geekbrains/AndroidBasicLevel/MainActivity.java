@@ -17,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private RecyclerView recyclerView;
     private RecyclerDataAdapter recyclerDataAdapter;
     private List<String> forecastDays = new ArrayList<>();
+    private List<String> forecastDescriptions = new ArrayList<>();
 
     private Toolbar toolbar;
 
@@ -134,14 +134,15 @@ public class MainActivity extends AppCompatActivity implements Constants {
             }
         });
 
-        FragmentTemperatureHistory fragmentTemperatureHistory = new FragmentTemperatureHistory();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer1, fragmentTemperatureHistory);
-        fragmentTransaction.commit();
+//        FragmentTemperatureHistory fragmentTemperatureHistory = new FragmentTemperatureHistory();
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.fragmentContainer1, fragmentTemperatureHistory);
+//        fragmentTransaction.commit();
 
         recyclerView = findViewById(R.id.recycler_view_Fragment);
         forecastDays = Arrays.asList(getResources().getStringArray(R.array.forecastDays));
-        recyclerDataAdapter = new RecyclerDataAdapter(forecastDays);
+        forecastDescriptions = Arrays.asList(getResources().getStringArray(R.array.forecastDescriptions));
+        recyclerDataAdapter = new RecyclerDataAdapter(forecastDays, forecastDescriptions);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(recyclerDataAdapter);
     }
