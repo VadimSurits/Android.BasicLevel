@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
 import javax.net.ssl.HttpsURLConnection;
 
 import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
+import geekbrains.AndroidBasicLevel.PreviousRequests.PreviousRequestsActivity;
 
 public class MainActivity extends AppCompatActivity implements Constants {
 
@@ -229,6 +230,9 @@ public class MainActivity extends AppCompatActivity implements Constants {
                         }
                     }).show();
             return true;
+        }
+        if(id == R.id.historyOfRequests){
+            startActivity(new Intent(MainActivity.this, PreviousRequestsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
