@@ -26,6 +26,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_drawer" />
+    <include layout="@layout/content_for_activity_previous_requests" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
