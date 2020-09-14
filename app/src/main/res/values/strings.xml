@@ -16,7 +16,6 @@
     <string name="checkBoxPressure">Pressure</string>
     <string name="Settings">Settings</string>
     <string name="PreviousRequestsHistory">History of requests</string>
-    <string name="buttonBonus">Bonus</string>
     <string name="UriMoscow">https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0</string>
     <string name="UriSpb">https://ru.wikipedia.org/wiki/%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3</string>
     <string name="UriEkaterinburg">https://ru.wikipedia.org/wiki/%D0%95%D0%BA%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%BD%D0%B1%D1%83%D1%80%D0%B3</string>
@@ -29,5 +28,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <!--    <string name="hello_blank_fragment">Hello blank fragment</string>-->
 
+    <string name="drawer_menu_mainActivity">Main Activity</string>
+    <string name="drawer_menu_cityChoiceActivity">City choice Activity</string>
+    <string name="drawer_menu_settingsActivity">Settings Activity</string>
+<!--    <string name="drawer_menu_name">Menu</string>-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+<!--    <string name="nav_header_desc">Navigation header</string>-->
+<!--    <string name="action_settings">Settings</string>-->
 
 </resources>

@@ -23,16 +23,6 @@
         app:srcCompat="@drawable/ic_baseline_wb_sunny_24"
         tools:srcCompat="@drawable/ic_baseline_wb_sunny_24" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonBonus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/buttonBonus"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/appTitle"
         android:layout_width="402dp"
