@@ -70,10 +70,13 @@ public class PreviousRequestsActivity extends AppCompatActivity implements Navig
         switch (id){
             case R.id.nav_mainActivity:
                 startActivity(new Intent(PreviousRequestsActivity.this, MainActivity.class));
+                return true;
             case R.id.nav_cityChoiceActivity:
                 startActivity(new Intent(PreviousRequestsActivity.this, CityChoiceActivity.class));
+                return true;
             case R.id.nav_settingsActivity:
                 startActivity(new Intent(PreviousRequestsActivity.this, SettingsActivity.class));
+                return true;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -231,8 +231,9 @@ public class MainActivity extends AppCompatActivity implements Constants {
                     }).show();
             return true;
         }
-        if(id == R.id.historyOfRequests){
+        if(id == R.id.historyOfRequests) {
             startActivity(new Intent(MainActivity.this, PreviousRequestsActivity.class));
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

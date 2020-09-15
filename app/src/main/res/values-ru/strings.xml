@@ -33,8 +33,8 @@
 <!--    <string name="drawer_menu_name">Меню</string>-->
     <string name="navigation_drawer_open">Открыть боковое меню</string>
     <string name="navigation_drawer_close">Закрыть боковое меню</string>
-    <string name="nav_header_title">Андроид Студио</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">VS Погода</string>
+    <string name="nav_header_subtitle">geekbrains.ru</string>
 <!--    <string name="nav_header_desc">Заголовок меню</string>-->
 <!--    <string name="action_settings">Настройки</string>-->
 

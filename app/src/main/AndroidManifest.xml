@@ -11,9 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyStyle">
-        <activity android:name=".PreviousRequests.PreviousRequestsActivity"></activity>
-        <activity android:name=".Bonus.CoatOfArmsActivity" />
-        <activity android:name=".Bonus.BonusActivity1" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +20,7 @@
         </activity>
         <activity android:name=".CityChoiceActivity" />
         <activity android:name=".SettingsActivity" />
+        <activity android:name=".PreviousRequests.PreviousRequestsActivity" />
     </application>
 
 </manifest>

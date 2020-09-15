@@ -7,8 +7,7 @@
         <item
             android:id="@+id/nav_mainActivity"
             android:icon="@drawable/ic_baseline_nav_main_activity"
-            android:title="@string/drawer_menu_mainActivity"
-            android:onClick=""/>
+            android:title="@string/drawer_menu_mainActivity" />
         <item
             android:id="@+id/nav_cityChoiceActivity"
             android:icon="@drawable/ic_baseline_nav_city_choice_activity"
