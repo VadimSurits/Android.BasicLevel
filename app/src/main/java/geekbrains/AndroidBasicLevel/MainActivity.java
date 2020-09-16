@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private TextView pressure;
     private TextView windSpeed;
 
+    DialogBuilderFragment dlgBuilder;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -98,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dlgBuilder = new DialogBuilderFragment();
 
         toolbar = findViewById(R.id.AppBarToolbar);
         setSupportActionBar(toolbar);
@@ -266,6 +270,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
                     } catch (Exception e) {
                         Log.e(TAG, "Fail connection", e);
                         e.printStackTrace();
+                        onClickDialogBuilder(dlgBuilder.getView());
                     } finally {
                         if (null != urlConnection) {
                             urlConnection.disconnect();
@@ -295,5 +300,9 @@ public class MainActivity extends AppCompatActivity implements Constants {
             windSpeed.setText(String.format("%s: %d", getString(R.string.checkBoxWindSpeed),
                     weatherRequest.getWind().getSpeed()));
         }
+    }
+
+    public void onClickDialogBuilder(View view){
+        dlgBuilder.show(getSupportFragmentManager(), "dialogBuilder");
     }
 }
