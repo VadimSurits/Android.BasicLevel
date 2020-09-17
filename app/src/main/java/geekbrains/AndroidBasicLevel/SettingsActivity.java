@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
-
-import geekbrains.AndroidBasicLevel.Bonus.BonusActivity1;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -66,16 +63,6 @@ public class SettingsActivity extends AppCompatActivity {
 //        }
 //        Toast.makeText(getApplicationContext(), instanceState + " SettingsActivity - onCreate()", Toast.LENGTH_SHORT).show();
 //        Log.d("SettingsActivity", " onCreate()");
-
-
-        Button buttonBonus = findViewById(R.id.buttonBonus);
-
-        buttonBonus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SettingsActivity.this, BonusActivity1.class));
-            }
-        });
     }
 
     @Override
