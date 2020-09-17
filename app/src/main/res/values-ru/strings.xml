@@ -30,12 +30,14 @@
     <string name="drawer_menu_mainActivity">Главная Activity</string>
     <string name="drawer_menu_cityChoiceActivity">Activity выбора города</string>
     <string name="drawer_menu_settingsActivity">Activity настроек</string>
-<!--    <string name="drawer_menu_name">Меню</string>-->
+
     <string name="navigation_drawer_open">Открыть боковое меню</string>
     <string name="navigation_drawer_close">Закрыть боковое меню</string>
     <string name="nav_header_title">VS Погода</string>
     <string name="nav_header_subtitle">geekbrains.ru</string>
-<!--    <string name="nav_header_desc">Заголовок меню</string>-->
-<!--    <string name="action_settings">Настройки</string>-->
+
+    <string name="title_dialog">Внимание</string>
+    <string name="dialog_positive_button">Ок</string>
+    <string name="message_dialog">Ошибка соединения с сервером: VS Погода не смогла получить актуальную информацию</string>
 
 </resources>

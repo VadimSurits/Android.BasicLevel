@@ -12,5 +12,5 @@ public interface Constants {
     String WEATHER_URL_SPb = "https://api.openweathermap.org/data/2.5/weather?q=Sankt-Peterburg,ru&APPID=";
     String WEATHER_URL_EKB = "https://api.openweathermap.org/data/2.5/weather?q=Ekaterinburg,ru&APPID=";
     String WEATHER_URL_NVS = "https://api.openweathermap.org/data/2.5/weather?q=Novosibirsk,ru&APPID=";
-    String WEATHER_URL_KHV = "https://api.openweathermap.org/data/2.5/weather?q=Khabarovsk,ru&APPID=";
+    String WEATHER_URL_KHV = "https://api.openweathermap.org/data/2.5/weather?q=Khabarovsk,ru&APPID=СПЕЦИАЛЬНАЯОШИБКА";
 }
