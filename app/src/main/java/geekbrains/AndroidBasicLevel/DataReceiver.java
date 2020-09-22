@@ -18,7 +18,14 @@ import javax.net.ssl.HttpsURLConnection;
 
 import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
 
-class DataReceiver extends MainActivity{
+class DataReceiver implements Constants{
+
+    DataParser dataParser = new DataParser(this);
+    MainActivity mainActivity;
+
+    public DataReceiver(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
 
     public void init(String url){
         try {
@@ -46,9 +53,9 @@ class DataReceiver extends MainActivity{
                             }
                         });
                     } catch (Exception e) {
-                        Log.e(TAG, "Fail connection", e);
+                        Log.e(mainActivity.TAG, "Fail connection", e);
                         e.printStackTrace();
-                        onClickDialogBuilder(dlgBuilder.getView());
+                        mainActivity.onClickDialogBuilder(mainActivity.dlgBuilder.getView());
                     } finally {
                         if (null != urlConnection) {
                             urlConnection.disconnect();
@@ -57,7 +64,7 @@ class DataReceiver extends MainActivity{
                 }
             }).start();
         } catch (MalformedURLException e) {
-            Log.e(TAG, "Fail URI", e);
+            Log.e(mainActivity.TAG, "Fail URI", e);
             e.printStackTrace();
         }
     }

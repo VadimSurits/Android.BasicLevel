@@ -35,15 +35,14 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
     private Toolbar toolbar;
 
-    static final String TAG = "WEATHER";
-    TextView cityName;
+    final String TAG = "WEATHER";
+    private TextView cityName;
     TextView temperature;
     TextView pressure;
     TextView windSpeed;
 
     DialogBuilderFragment dlgBuilder;
-    DataReceiver dataReceiver;
-    DataParser dataParser;
+    private DataReceiver dataReceiver;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -54,8 +53,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         windSpeed = findViewById(R.id.windSpeed);
         pressure = findViewById(R.id.pressure);
 
-        dataReceiver = new DataReceiver();
-        dataParser = new DataParser();
+        dataReceiver = new DataReceiver(this);
 
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
@@ -74,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         if (cityName.getText().equals(getString(R.string.buttonMoscow))) {
 //            init(WEATHER_URL_MOSCOW);
             dataReceiver.init(WEATHER_URL_MOSCOW);
+
         }
         if (cityName.getText().equals(getString(R.string.buttonSpb))) {
 //            init(WEATHER_URL_SPb);
@@ -241,6 +240,10 @@ public class MainActivity extends AppCompatActivity implements Constants {
         return super.onOptionsItemSelected(item);
     }
 
+//***
+// Вынес методы init() и getLines() в отдельный класс DataReceiver
+// Вынес метод setWeatherData() в отдельный класс DataParser
+//***
 //    private void init(String url){
 //        try {
 //            final URL uri = new URL(url + WEATHER_API_KEY);
@@ -282,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
 //            e.printStackTrace();
 //        }
 //    }
-
+//
 //    @SuppressLint("DefaultLocale")
 //    private void setWeatherData(WeatherRequest weatherRequest){
 //        temperature.setText(String.format("%.2f F", weatherRequest.getMain().getTemp()));
@@ -294,6 +297,11 @@ public class MainActivity extends AppCompatActivity implements Constants {
 //            windSpeed.setText(String.format("%s: %d", getString(R.string.checkBoxWindSpeed),
 //                    weatherRequest.getWind().getSpeed()));
 //        }
+//    }
+//
+//    @RequiresApi(api = Build.VERSION_CODES.N)
+//    private String getLines(BufferedReader in) {
+//        return in.lines().collect(Collectors.joining("\n"));
 //    }
 
     public void onClickDialogBuilder(View view){

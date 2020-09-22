@@ -4,17 +4,22 @@ import android.annotation.SuppressLint;
 
 import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
 
-class DataParser extends MainActivity{
+class DataParser{
+    private DataReceiver dataReceiver;
+
+    public DataParser(DataReceiver dataReceiver) {
+        this.dataReceiver = dataReceiver;
+    }
 
     @SuppressLint("DefaultLocale")
     void setWeatherData(WeatherRequest weatherRequest){
-        temperature.setText(String.format("%.2f F", weatherRequest.getMain().getTemp()));
-        if (pressure.getText().equals(getString(R.string.checkBoxPressure))) {
-            pressure.setText(String.format("%s: %d", getString(R.string.checkBoxPressure),
+        dataReceiver.mainActivity.temperature.setText(String.format("%.2f F", weatherRequest.getMain().getTemp()));
+        if (dataReceiver.mainActivity.pressure.getText().equals(dataReceiver.mainActivity.getString(R.string.checkBoxPressure))) {
+            dataReceiver.mainActivity.pressure.setText(String.format("%s: %d", dataReceiver.mainActivity.getString(R.string.checkBoxPressure),
                     weatherRequest.getMain().getPressure()));
         }
-        if (windSpeed.getText().equals(getString(R.string.checkBoxWindSpeed))) {
-            windSpeed.setText(String.format("%s: %d", getString(R.string.checkBoxWindSpeed),
+        if (dataReceiver.mainActivity.windSpeed.getText().equals(dataReceiver.mainActivity.getString(R.string.checkBoxWindSpeed))) {
+            dataReceiver.mainActivity.windSpeed.setText(String.format("%s: %d", dataReceiver.mainActivity.getString(R.string.checkBoxWindSpeed),
                     weatherRequest.getWind().getSpeed()));
         }
     }
