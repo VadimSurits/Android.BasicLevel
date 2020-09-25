@@ -259,7 +259,6 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
         super.onSaveInstanceState(saveInstanceState);
     }
 
-
     @Override
     protected void onStop(){
         super.onStop();
