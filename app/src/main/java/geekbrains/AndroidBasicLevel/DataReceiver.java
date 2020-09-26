@@ -18,6 +18,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
 
+import static geekbrains.AndroidBasicLevel.MainActivity.TAG;
+
 class DataReceiver implements Constants{
 
     DataParser dataParser = new DataParser(this);
@@ -53,7 +55,7 @@ class DataReceiver implements Constants{
                             }
                         });
                     } catch (Exception e) {
-                        Log.e(mainActivity.TAG, "Fail connection", e);
+                        Log.e(TAG, "Fail connection", e);
                         e.printStackTrace();
                         mainActivity.onClickDialogBuilder(mainActivity.dlgBuilder.getView());
                     } finally {
@@ -64,7 +66,7 @@ class DataReceiver implements Constants{
                 }
             }).start();
         } catch (MalformedURLException e) {
-            Log.e(mainActivity.TAG, "Fail URI", e);
+            Log.e(TAG, "Fail URI", e);
             e.printStackTrace();
         }
     }

@@ -1,5 +1,6 @@
 package geekbrains.AndroidBasicLevel;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,11 +23,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
 import geekbrains.AndroidBasicLevel.PreviousRequests.PreviousRequestsActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements Constants {
 
     Uri uri = Uri.parse("http://geekbrains.ru");
+
+    private static final float AbsoluteZero = -273.15f;
 
     private RecyclerView recyclerView;
     private RecyclerDataAdapter recyclerDataAdapter;
@@ -35,14 +44,14 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
     private Toolbar toolbar;
 
-    final String TAG = "WEATHER";
+    final static String TAG = "WEATHER";
     private TextView cityName;
     TextView temperature;
     TextView pressure;
     TextView windSpeed;
 
     DialogBuilderFragment dlgBuilder;
-    private DataReceiver dataReceiver;
+    private OpenWeather openWeather;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -52,8 +61,6 @@ public class MainActivity extends AppCompatActivity implements Constants {
         temperature = findViewById(R.id.temperature);
         windSpeed = findViewById(R.id.windSpeed);
         pressure = findViewById(R.id.pressure);
-
-        dataReceiver = new DataReceiver(this);
 
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
@@ -70,25 +77,19 @@ public class MainActivity extends AppCompatActivity implements Constants {
                 cityName.setText("Город не выбран");
             }
         if (cityName.getText().equals(getString(R.string.buttonMoscow))) {
-//            init(WEATHER_URL_MOSCOW);
-            dataReceiver.init(WEATHER_URL_MOSCOW);
-
+            requestRetrofit(CITY_MOSCOW, WEATHER_API_KEY);
         }
         if (cityName.getText().equals(getString(R.string.buttonSpb))) {
-//            init(WEATHER_URL_SPb);
-            dataReceiver.init(WEATHER_URL_SPb);
+            requestRetrofit(CITY_SPB,WEATHER_API_KEY);
         }
         if (cityName.getText().equals(getString(R.string.buttonEkaterinburg))) {
-//            init(WEATHER_URL_EKB);
-            dataReceiver.init(WEATHER_URL_EKB);
+            requestRetrofit(CITY_EKB,WEATHER_API_KEY);
         }
         if (cityName.getText().equals(getString(R.string.buttonNovosibirsk))) {
-//            init(WEATHER_URL_NVS);
-            dataReceiver.init(WEATHER_URL_NVS);
+            requestRetrofit(CITY_NVS,WEATHER_API_KEY);
         }
         if (cityName.getText().equals(getString(R.string.buttonKhabarovsk))) {
-//            init(WEATHER_URL_KHV);
-            dataReceiver.init(WEATHER_URL_KHV);
+            requestRetrofit(CITY_KHV,WEATHER_API_KEY);
         }
     }
 
@@ -137,17 +138,14 @@ public class MainActivity extends AppCompatActivity implements Constants {
             }
         });
 
-//        FragmentTemperatureHistory fragmentTemperatureHistory = new FragmentTemperatureHistory();
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.fragmentContainer1, fragmentTemperatureHistory);
-//        fragmentTransaction.commit();
-
         recyclerView = findViewById(R.id.recycler_view_Fragment);
         forecastDays = Arrays.asList(getResources().getStringArray(R.array.forecastDays));
         forecastDescriptions = Arrays.asList(getResources().getStringArray(R.array.forecastDescriptions));
         recyclerDataAdapter = new RecyclerDataAdapter(forecastDays, forecastDescriptions);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(recyclerDataAdapter);
+
+        initRetrofit();
     }
 
     @Override
@@ -240,71 +238,47 @@ public class MainActivity extends AppCompatActivity implements Constants {
         return super.onOptionsItemSelected(item);
     }
 
-//***
-// Вынес методы init() и getLines() в отдельный класс DataReceiver
-// Вынес метод setWeatherData() в отдельный класс DataParser
-//***
-//    private void init(String url){
-//        try {
-//            final URL uri = new URL(url + WEATHER_API_KEY);
-//            final Handler handler = new Handler(); // Запоминаем основной поток
-//            new Thread(new Runnable() {
-//                @RequiresApi(api = Build.VERSION_CODES.N)
-//                public void run() {
-//                    HttpsURLConnection urlConnection = null;
-//                    try {
-//                        urlConnection = (HttpsURLConnection) uri.openConnection();
-//                        urlConnection.setRequestMethod("GET"); // установка метода получения данных -GET
-//                        urlConnection.setReadTimeout(10000); // установка таймаута - 10 000 миллисекунд
-//                        BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream())); // читаем  данные в поток
-//                        String result = getLines(in);
-//                        // преобразование данных запроса в модель
-//                        Gson gson = new Gson();
-//                        final WeatherRequest weatherRequest = gson.fromJson(result, WeatherRequest.class);
-////                        final WeatherRequest weatherRequest = gson.fromJson(result, WeatherRequest.class);
-//                        // Возвращаемся к основному потоку
-//                        handler.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                setWeatherData(weatherRequest);
-//                            }
-//                        });
-//                    } catch (Exception e) {
-//                        Log.e(TAG, "Fail connection", e);
-//                        e.printStackTrace();
-//                        onClickDialogBuilder(dlgBuilder.getView());
-//                    } finally {
-//                        if (null != urlConnection) {
-//                            urlConnection.disconnect();
-//                        }
-//                    }
-//                }
-//            }).start();
-//        } catch (MalformedURLException e) {
-//            Log.e(TAG, "Fail URI", e);
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @SuppressLint("DefaultLocale")
-//    private void setWeatherData(WeatherRequest weatherRequest){
-//        temperature.setText(String.format("%.2f F", weatherRequest.getMain().getTemp()));
-//        if (pressure.getText().equals(getString(R.string.checkBoxPressure))) {
-//            pressure.setText(String.format("%s: %d", getString(R.string.checkBoxPressure),
-//                    weatherRequest.getMain().getPressure()));
-//        }
-//        if (windSpeed.getText().equals(getString(R.string.checkBoxWindSpeed))) {
-//            windSpeed.setText(String.format("%s: %d", getString(R.string.checkBoxWindSpeed),
-//                    weatherRequest.getWind().getSpeed()));
-//        }
-//    }
-//
-//    @RequiresApi(api = Build.VERSION_CODES.N)
-//    private String getLines(BufferedReader in) {
-//        return in.lines().collect(Collectors.joining("\n"));
-//    }
-
     public void onClickDialogBuilder(View view){
         dlgBuilder.show(getSupportFragmentManager(), "dialogBuilder");
+    }
+
+    private void initRetrofit() {
+        Retrofit retrofit;
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.openweathermap.org/") //Базовая часть адреса
+                .addConverterFactory(GsonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
+                .build();
+        openWeather = retrofit.create(OpenWeather.class); //Создаем объект, при помощи которого будем выполнять запросы
+    }
+
+    private void requestRetrofit(String city, String keyApi) {
+        openWeather.loadWeather(city, keyApi)
+                .enqueue(new Callback<WeatherRequest>() {
+                    @SuppressLint("DefaultLocale")
+                    @Override
+                    public void onResponse(Call<WeatherRequest> call, Response<WeatherRequest> response) {
+                        if (response.body() != null) {
+                            float receivedTemperature = response.body().getMain().getTemp() + AbsoluteZero;
+                            temperature.setText(String.format("%.1f C", receivedTemperature));
+
+                            int receivedPressure = response.body().getMain().getPressure();
+                            if (pressure.getText().equals(getString(R.string.checkBoxPressure))) {
+                            pressure.setText(String.format("%s: %d", getString(R.string.checkBoxPressure),
+                                    receivedPressure));
+                            }
+
+                            int receivedWindSpeed = response.body().getWind().getSpeed();
+                            if (windSpeed.getText().equals(getString(R.string.checkBoxWindSpeed))) {
+                                windSpeed.setText(String.format("%s: %d", getString(R.string.checkBoxWindSpeed),
+                                        receivedWindSpeed));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<WeatherRequest> call, Throwable t) {
+                        onClickDialogBuilder(dlgBuilder.getView());
+                    }
+                });
     }
 }
