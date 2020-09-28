@@ -35,12 +35,9 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
                        String str = editCityName.getText().toString();
                        if (str.equals(getString(R.string.buttonMoscow))) {
-//                           init(WEATHER_URL_MOSCOW);
                            Intent intentResult = new Intent();
                            intentResult.putExtra("CITY", str);
                            setResult(RESULT_OK, intentResult);
-//                           intentResult.putExtra("TEMPERATURE", receivedTemperature.getText().toString());
-//                           setResult(RESULT_OK, intentResult);
                            intentResult.putExtra("URI", getString(R.string.UriMoscow));
                            setResult(RESULT_OK, intentResult);
                            if (checkBoxWindSpeed.isChecked()) {

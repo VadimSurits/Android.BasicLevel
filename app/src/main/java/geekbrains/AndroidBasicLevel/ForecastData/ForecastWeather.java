@@ -10,6 +10,17 @@ public class ForecastWeather {
     @SerializedName("description")
     @Expose
     private String description;
+    @SerializedName("icon")
+    @Expose
+    private String icon;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public String getDescription() {
         return description;

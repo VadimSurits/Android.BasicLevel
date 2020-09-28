@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5A6BCD">
@@ -83,6 +84,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/appTitle" />
+
+        <FrameLayout
+            android:id="@+id/iconFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/pressure"
+            app:layout_constraintEnd_toStartOf="@+id/temperature"
+            app:layout_constraintStart_toEndOf="@+id/cityName"
+            app:layout_constraintTop_toTopOf="@+id/mainImage">
+                <ImageView
+                    android:id="@+id/forecastIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toTopOf="@+id/pressure"
+                    app:layout_constraintEnd_toStartOf="@+id/temperature"
+                    app:layout_constraintStart_toEndOf="@+id/cityName"
+                    app:layout_constraintTop_toTopOf="@+id/mainImage"
+                    android:layout_marginBottom="20dp"/>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/windSpeed"
