@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
     DialogBuilderFragment dlgBuilder;
     private OpenWeather openWeather;
+    private String receivedIcon;
+    private String cityImageUrl;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
             requestRetrofit(CITY_KHV,WEATHER_API_KEY);
             getCityImage("https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL0toYWJhcm92c2svMTkuanBnP19faWQ9MTA4NTg5.jpeg");
         }
+
     }
 
     @Override
@@ -158,11 +159,11 @@ public class MainActivity extends AppCompatActivity implements Constants {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(recyclerDataAdapter);
 
-        Fragment fragment = new Fragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.iconFragment, fragment);
-        fragment.setRetainInstance(true);
-        fragmentTransaction.commit();
+//        Fragment fragment = new Fragment();
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.iconFragment, fragment);
+//        fragment.setRetainInstance(true);
+//        fragmentTransaction.commit();
 
         initRetrofit();
     }
@@ -188,6 +189,10 @@ public class MainActivity extends AppCompatActivity implements Constants {
         pressure.setText(saveIS.getString("pressure"));
         uri = Uri.parse(saveIS.getString("URI"));
         forecastDescriptions.set(0, saveIS.getString("description"));
+        receivedIcon = (String) saveIS.get("icon");
+        getForecastIcon("http://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
+        cityImageUrl = saveIS.getString("cityImage");
+        getCityImage(cityImageUrl);
     }
 
     @Override
@@ -214,6 +219,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
         saveIS.putString("pressure", pressure.getText().toString());
         saveIS.putString("URI",uri.toString());
         saveIS.putString("description", forecastDescriptions.get(0));
+        saveIS.putString("icon", receivedIcon);
+        saveIS.putString("cityImage", cityImageUrl);
     }
 
     @Override
@@ -295,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
                             }
                             String receivedDescription = response.body().getWeather()[0].getDescription();
                             forecastDescriptions.set(0, receivedDescription);
-                            String receivedIcon = response.body().getWeather()[0].getIcon();
+                            receivedIcon = response.body().getWeather()[0].getIcon();
                             getForecastIcon("http://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
                         }
                     }
@@ -312,6 +319,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         Picasso.get()
                 .load(url)
                 .into(picture);
+        cityImageUrl = url;
     }
 
     private void getForecastIcon(String url){
