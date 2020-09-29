@@ -1,6 +1,11 @@
 package geekbrains.AndroidBasicLevel.ForecastData;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ForecastClouds {
+    @SerializedName("all")
+    @Expose
     private int all;
 
     public int getAll() {

@@ -1,7 +1,14 @@
 package geekbrains.AndroidBasicLevel.ForecastData;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ForecastWind {
+    @SerializedName("speed")
+    @Expose
     private int speed;
+    @SerializedName("deg")
+    @Expose
     private int deg;
 
     public int getDeg() {

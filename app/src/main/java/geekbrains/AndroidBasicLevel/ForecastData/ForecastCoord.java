@@ -1,7 +1,14 @@
 package geekbrains.AndroidBasicLevel.ForecastData;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ForecastCoord {
+    @SerializedName("lat")
+    @Expose
     private float lat;
+    @SerializedName("lon")
+    @Expose
     private float lon;
 
     public float getLon() {
