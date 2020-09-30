@@ -39,5 +39,6 @@
     <string name="dialog_positive_button">Ok</string>
     <string name="message_dialog">Connection error: VS Weather could not get actual information</string>
 
+    <string name="date">Date</string>
 
 </resources>
