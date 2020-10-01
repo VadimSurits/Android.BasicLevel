@@ -23,10 +23,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
 import geekbrains.AndroidBasicLevel.PreviousRequests.PreviousRequestsActivity;
+import geekbrains.AndroidBasicLevel.PreviousRequests.RecyclerDataAdapter_for_PRActivity;
+import geekbrains.AndroidBasicLevel.PreviousRequests.model.PreviousRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private OpenWeather openWeather;
     private String receivedIcon;
     private String cityImageUrl;
+    private String chosenCity;
+
+    private Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -70,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                String chosenCity = data.getStringExtra(CityChoiceActivity.CITY);
+                chosenCity = data.getStringExtra(CityChoiceActivity.CITY);
                 cityName.setText(chosenCity);
                 String receivedWindSpeed = data.getStringExtra(CityChoiceActivity.WIND_SPEED);
                 windSpeed.setText(receivedWindSpeed);
@@ -102,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements Constants {
             requestRetrofit(CITY_KHV,WEATHER_API_KEY);
             getCityImage("https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL0toYWJhcm92c2svMTkuanBnP19faWQ9MTA4NTg5.jpeg");
         }
-
     }
 
     @Override
@@ -158,12 +163,6 @@ public class MainActivity extends AppCompatActivity implements Constants {
         recyclerDataAdapter = new RecyclerDataAdapter(forecastDays, forecastDescriptions);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(recyclerDataAdapter);
-
-//        Fragment fragment = new Fragment();
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.iconFragment, fragment);
-//        fragment.setRetainInstance(true);
-//        fragmentTransaction.commit();
 
         initRetrofit();
     }
@@ -279,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         openWeather = retrofit.create(OpenWeather.class); //Создаем объект, при помощи которого будем выполнять запросы
     }
 
-    private void requestRetrofit(String city, String keyApi) {
+    private void requestRetrofit(final String city, String keyApi) {
         openWeather.loadWeather(city, keyApi)
                 .enqueue(new Callback<WeatherRequest>() {
                     @SuppressLint("DefaultLocale")
@@ -304,6 +303,11 @@ public class MainActivity extends AppCompatActivity implements Constants {
                             forecastDescriptions.set(0, receivedDescription);
                             receivedIcon = response.body().getWeather()[0].getIcon();
                             getForecastIcon("http://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
+
+                            String currentDate = calendar.get(Calendar.DATE) + "." + calendar.get(Calendar.MONTH) + "."
+                                    + calendar.get(Calendar.YEAR);
+                            RecyclerDataAdapter_for_PRActivity.dataSource.addPreviousRequest
+                                    (new PreviousRequest(chosenCity,currentDate,String.format("%.1f C", receivedTemperature)));
                         }
                     }
 

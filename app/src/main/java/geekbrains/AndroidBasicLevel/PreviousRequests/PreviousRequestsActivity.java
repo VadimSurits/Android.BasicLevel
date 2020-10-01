@@ -15,12 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.Calendar;
-
 import geekbrains.AndroidBasicLevel.CityChoiceActivity;
 import geekbrains.AndroidBasicLevel.MainActivity;
 import geekbrains.AndroidBasicLevel.PreviousRequests.Dao.RequestDao;
-import geekbrains.AndroidBasicLevel.PreviousRequests.model.PreviousRequest;
 import geekbrains.AndroidBasicLevel.R;
 import geekbrains.AndroidBasicLevel.SettingsActivity;
 
@@ -28,29 +25,12 @@ public class PreviousRequestsActivity extends AppCompatActivity implements Navig
 
     private RecyclerView recyclerView;
     private RecyclerDataAdapter_for_PRActivity recyclerDataAdapter_for_prActivity;
-    private PreviousRequestsSource previousRequestsSource;
-//    private ArrayList<PreviousRequest> previousRequests = new ArrayList<>();
-    Calendar calendar = Calendar.getInstance();
-    String currentDate = calendar.get(Calendar.DATE) + "." + calendar.get(Calendar.MONTH) + "."
-            + calendar.get(Calendar.YEAR);
+    public static PreviousRequestsSource previousRequestsSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_previous_requests);
-
-        previousRequestsSource.addPreviousRequest(new PreviousRequest());
-//        previousRequests.add(new PreviousRequest("Moscow",currentDate,260.6f));
-//        previousRequests.add(new PreviousRequest("Saint-Petersburg",260.6f, 1050,5));
-//        previousRequests.add(new PreviousRequest("Ekaterinburg",270.7f, 1010, 2));
-//        previousRequests.add(new PreviousRequest("Novosibirsk",280.8f, 1020,7));
-//        previousRequests.add(new PreviousRequest("Khabarovsk",290.9f, 1030,4));
-
-//        recyclerView = findViewById(R.id.recycler_view_for_HoR);
-//        recyclerDataAdapter_for_prActivity = new RecyclerDataAdapter_for_PRActivity(previousRequests);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-//        recyclerView.setAdapter(recyclerDataAdapter_for_prActivity);
-
         iniRecyclerView();
 
         Toolbar toolbar = initToolbar();
@@ -59,8 +39,6 @@ public class PreviousRequestsActivity extends AppCompatActivity implements Navig
 
     private void iniRecyclerView(){
         recyclerView = findViewById(R.id.recycler_view_for_HoR);
-//        recyclerDataAdapter_for_prActivity = new RecyclerDataAdapter_for_PRActivity(previousRequests);
-        recyclerDataAdapter_for_prActivity = new RecyclerDataAdapter_for_PRActivity(previousRequestsSource, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
         RequestDao requestDao = App
@@ -68,6 +46,7 @@ public class PreviousRequestsActivity extends AppCompatActivity implements Navig
                 .getRequestDao();
         previousRequestsSource = new PreviousRequestsSource(requestDao);
 
+        recyclerDataAdapter_for_prActivity = new RecyclerDataAdapter_for_PRActivity(previousRequestsSource, this);
         recyclerView.setAdapter(recyclerDataAdapter_for_prActivity);
     }
 

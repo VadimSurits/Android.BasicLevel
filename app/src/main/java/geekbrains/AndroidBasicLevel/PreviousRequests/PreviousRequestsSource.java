@@ -31,12 +31,9 @@ public class PreviousRequestsSource {
     }
 
     public void addPreviousRequest(PreviousRequest previousRequest){
+
         requestDao.insertRequest(previousRequest);
         LoadPreviousRequests();
-    }
-
-    public void updatePreviousrequest(PreviousRequest previousRequest){
-        requestDao.updateRequest(previousRequest);
     }
 
     public void removePreviousRequest(long id){

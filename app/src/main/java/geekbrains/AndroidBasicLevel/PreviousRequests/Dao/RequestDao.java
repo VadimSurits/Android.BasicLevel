@@ -5,7 +5,6 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import java.util.List;
 
@@ -17,9 +16,6 @@ public interface RequestDao {
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertRequest(PreviousRequest previousRequest);
-
-    @Update
-    void updateRequest(PreviousRequest previousRequest);
 
     @Delete
     void deleteRequest(PreviousRequest previousRequest);

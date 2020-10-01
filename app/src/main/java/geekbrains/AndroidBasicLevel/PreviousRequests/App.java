@@ -35,4 +35,7 @@ public class App extends Application {
         return rd.getRequestDao();
     }
 
+    public RequestDatabase getRd() {
+        return rd;
+    }
 }
