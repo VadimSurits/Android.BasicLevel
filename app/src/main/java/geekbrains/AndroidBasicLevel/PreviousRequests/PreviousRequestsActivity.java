@@ -1,4 +1,4 @@
-package geekbrains.AndroidBasicLevel.PreviousRequests;
+package geekbrains.AndroidBasicLevel.previousRequests;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,37 +15,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
-
 import geekbrains.AndroidBasicLevel.CityChoiceActivity;
 import geekbrains.AndroidBasicLevel.MainActivity;
 import geekbrains.AndroidBasicLevel.R;
 import geekbrains.AndroidBasicLevel.SettingsActivity;
+import geekbrains.AndroidBasicLevel.previousRequests.dao.RequestDao;
 
 public class PreviousRequestsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
-    private RecyclerDataAdapter_for_PRActivity recyclerDataAdapter_for_prActivity;
-    private ArrayList<PreviousRequest> previousRequests = new ArrayList<>();
+    private RecyclerDataAdapterForPRActivity recyclerDataAdapter_for_prActivity;
+    public static PreviousRequestsSource previousRequestsSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_previous_requests);
-
-        previousRequests.add(new PreviousRequest("Moscow",250.5f, 1000,10));
-        previousRequests.add(new PreviousRequest("Saint-Petersburg",260.6f, 1050,5));
-        previousRequests.add(new PreviousRequest("Ekaterinburg",270.7f, 1010, 2));
-        previousRequests.add(new PreviousRequest("Novosibirsk",280.8f, 1020,7));
-        previousRequests.add(new PreviousRequest("Khabarovsk",290.9f, 1030,4));
-
-        recyclerView = findViewById(R.id.recycler_view_for_HoR);
-        recyclerDataAdapter_for_prActivity = new RecyclerDataAdapter_for_PRActivity(previousRequests);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        recyclerView.setAdapter(recyclerDataAdapter_for_prActivity);
+        iniRecyclerView();
 
         Toolbar toolbar = initToolbar();
         initDrawer(toolbar);
+    }
+
+    private void iniRecyclerView(){
+        recyclerView = findViewById(R.id.recycler_view_for_HoR);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, true));
+
+        RequestDao requestDao = App
+                .getInstance()
+                .getRequestDao();
+        previousRequestsSource = new PreviousRequestsSource(requestDao);
+
+        recyclerDataAdapter_for_prActivity = new RecyclerDataAdapterForPRActivity(previousRequestsSource, this);
+        recyclerView.setAdapter(recyclerDataAdapter_for_prActivity);
     }
 
     private Toolbar initToolbar(){

@@ -1,7 +1,9 @@
 package geekbrains.AndroidBasicLevel;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,10 +25,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
-import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
-import geekbrains.AndroidBasicLevel.PreviousRequests.PreviousRequestsActivity;
+import geekbrains.AndroidBasicLevel.forecastData.WeatherRequest;
+import geekbrains.AndroidBasicLevel.previousRequests.PreviousRequestsActivity;
+import geekbrains.AndroidBasicLevel.previousRequests.RecyclerDataAdapterForPRActivity;
+import geekbrains.AndroidBasicLevel.previousRequests.model.PreviousRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,7 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements Constants {
 
-    Uri uri = Uri.parse("http://geekbrains.ru");
+    Uri uri = Uri.parse("https://geekbrains.ru");
 
     private static final float AbsoluteZero = -273.15f;
 
@@ -58,6 +63,20 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private OpenWeather openWeather;
     private String receivedIcon;
     private String cityImageUrl;
+    private String chosenCity;
+
+    private Calendar calendar = Calendar.getInstance();
+
+    private final String APP_PREFERENCES = "mysettings";
+    private final String APP_CITYNAME = "cityname";
+    private final String APP_TEMPERATURE = "temperature";
+    private final String APP_WETHERICON = "weathericon";
+    private final String APP_FORECASTDESCRIPTION = "forecastdescription";
+    private final String APP_CITYPICTURE = "citypicture";
+    private final String APP_WINDSPEED = "windspeed";
+    private final String APP_PRESSURE = "pressure";
+    private final String APP_WIKIPEDIA = "wikipediaUrl";
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -70,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                String chosenCity = data.getStringExtra(CityChoiceActivity.CITY);
+                chosenCity = data.getStringExtra(CityChoiceActivity.CITY);
                 cityName.setText(chosenCity);
                 String receivedWindSpeed = data.getStringExtra(CityChoiceActivity.WIND_SPEED);
                 windSpeed.setText(receivedWindSpeed);
@@ -102,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements Constants {
             requestRetrofit(CITY_KHV,WEATHER_API_KEY);
             getCityImage("https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL0toYWJhcm92c2svMTkuanBnP19faWQ9MTA4NTg5.jpeg");
         }
-
     }
 
     @Override
@@ -159,13 +177,34 @@ public class MainActivity extends AppCompatActivity implements Constants {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(recyclerDataAdapter);
 
-//        Fragment fragment = new Fragment();
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.iconFragment, fragment);
-//        fragment.setRetainInstance(true);
-//        fragmentTransaction.commit();
-
         initRetrofit();
+
+        sharedPreferences = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        if(sharedPreferences.contains(APP_CITYNAME)){
+            cityName.setText(sharedPreferences.getString(APP_CITYNAME,""));
+        }
+        if(sharedPreferences.contains(APP_TEMPERATURE)){
+            temperature.setText(sharedPreferences.getString(APP_TEMPERATURE,""));
+        }
+        if(sharedPreferences.contains(APP_WETHERICON)){
+            getForecastIcon("https://openweathermap.org/img/wn/"
+                    + sharedPreferences.getString(APP_WETHERICON,"") + "@2x.png");
+        }
+        if(sharedPreferences.contains(APP_FORECASTDESCRIPTION)){
+            forecastDescriptions.set(0,sharedPreferences.getString(APP_FORECASTDESCRIPTION,""));
+        }
+        if(sharedPreferences.contains(APP_CITYPICTURE)){
+            getCityImage(sharedPreferences.getString(APP_CITYPICTURE,""));
+        }
+        if(sharedPreferences.contains(APP_WINDSPEED)){
+            windSpeed.setText(sharedPreferences.getString(APP_WINDSPEED,""));
+        }
+        if(sharedPreferences.contains(APP_PRESSURE)){
+            pressure.setText(sharedPreferences.getString(APP_PRESSURE,""));
+        }
+        if(sharedPreferences.contains(APP_WIKIPEDIA)){
+            uri = Uri.parse(sharedPreferences.getString(APP_WIKIPEDIA,""));
+        }
     }
 
     @Override
@@ -190,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         uri = Uri.parse(saveIS.getString("URI"));
         forecastDescriptions.set(0, saveIS.getString("description"));
         receivedIcon = (String) saveIS.get("icon");
-        getForecastIcon("http://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
+        getForecastIcon("https://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
         cityImageUrl = saveIS.getString("cityImage");
         getCityImage(cityImageUrl);
     }
@@ -226,6 +265,27 @@ public class MainActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onStop(){
         super.onStop();
+        cityName = findViewById(R.id.cityName);
+        temperature = findViewById(R.id.temperature);
+        windSpeed = findViewById(R.id.windSpeed);
+        pressure = findViewById(R.id.pressure);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(APP_CITYNAME,cityName.getText().toString());
+        editor.putString(APP_TEMPERATURE, temperature.getText().toString());
+        if(receivedIcon != null) {
+            editor.putString(APP_WETHERICON, receivedIcon);
+        }
+        editor.putString(APP_FORECASTDESCRIPTION, forecastDescriptions.get(0));
+        editor.putString(APP_CITYPICTURE, cityImageUrl);
+        if(pressure.getText().equals(getString(R.string.checkBoxPressure))){
+            editor.putString(APP_PRESSURE, pressure.getText().toString());
+        }
+        if(windSpeed.getText().equals(getString(R.string.checkBoxWindSpeed))){
+            editor.putString(APP_WINDSPEED, windSpeed.getText().toString());
+        }
+        editor.putString(APP_WIKIPEDIA, String.valueOf(uri));
+        editor.apply();
     }
 
     @Override
@@ -273,13 +333,13 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private void initRetrofit() {
         Retrofit retrofit;
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.openweathermap.org/") //Базовая часть адреса
+                .baseUrl("https://api.openweathermap.org/") //Базовая часть адреса
                 .addConverterFactory(GsonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
                 .build();
         openWeather = retrofit.create(OpenWeather.class); //Создаем объект, при помощи которого будем выполнять запросы
     }
 
-    private void requestRetrofit(String city, String keyApi) {
+    private void requestRetrofit(final String city, String keyApi) {
         openWeather.loadWeather(city, keyApi)
                 .enqueue(new Callback<WeatherRequest>() {
                     @SuppressLint("DefaultLocale")
@@ -303,7 +363,16 @@ public class MainActivity extends AppCompatActivity implements Constants {
                             String receivedDescription = response.body().getWeather()[0].getDescription();
                             forecastDescriptions.set(0, receivedDescription);
                             receivedIcon = response.body().getWeather()[0].getIcon();
-                            getForecastIcon("http://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
+                            getForecastIcon("https://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
+
+                            try{
+                                String currentDate = calendar.get(Calendar.DATE) + "." + calendar.get(Calendar.MONTH) + "."
+                                        + calendar.get(Calendar.YEAR);
+                                RecyclerDataAdapterForPRActivity.dataSource.addPreviousRequest
+                                        (new PreviousRequest(chosenCity,currentDate,String.format("%.1f C", receivedTemperature)));
+                            } catch(NullPointerException e){
+                                Log.e(TAG, "NullPointerException");
+                            }
                         }
                     }
 

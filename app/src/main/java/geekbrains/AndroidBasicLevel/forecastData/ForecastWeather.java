@@ -1,4 +1,4 @@
-package geekbrains.AndroidBasicLevel.ForecastData;
+package geekbrains.AndroidBasicLevel.forecastData;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
