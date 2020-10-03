@@ -1,4 +1,4 @@
-package geekbrains.AndroidBasicLevel.PreviousRequests;
+package geekbrains.AndroidBasicLevel.previousRequests;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,16 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import geekbrains.AndroidBasicLevel.PreviousRequests.model.PreviousRequest;
+import geekbrains.AndroidBasicLevel.previousRequests.model.PreviousRequest;
 import geekbrains.AndroidBasicLevel.R;
 
-public class RecyclerDataAdapter_for_PRActivity extends RecyclerView.
-        Adapter<RecyclerDataAdapter_for_PRActivity.ViewHolder> {
+public class RecyclerDataAdapterForPRActivity extends RecyclerView.
+        Adapter<RecyclerDataAdapterForPRActivity.ViewHolder> {
 
     private Activity activity;
     public static PreviousRequestsSource dataSource;
 
-    public RecyclerDataAdapter_for_PRActivity(PreviousRequestsSource dataSource, Activity activity){
+    public RecyclerDataAdapterForPRActivity(PreviousRequestsSource dataSource, Activity activity){
         this.dataSource = dataSource;
         this.activity = activity;
 
@@ -30,7 +30,7 @@ public class RecyclerDataAdapter_for_PRActivity extends RecyclerView.
 
     @NonNull
     @Override
-    public RecyclerDataAdapter_for_PRActivity.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerDataAdapterForPRActivity.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.item,parent,false);
         return new ViewHolder(view);
@@ -38,7 +38,7 @@ public class RecyclerDataAdapter_for_PRActivity extends RecyclerView.
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull RecyclerDataAdapter_for_PRActivity.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerDataAdapterForPRActivity.ViewHolder holder, int position) {
         List<PreviousRequest> previousRequests = dataSource.getPreviousRequests();
         PreviousRequest previousRequest = previousRequests.get(position);
         holder.cityName.setText(previousRequest.cityName);

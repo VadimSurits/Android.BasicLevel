@@ -1,10 +1,10 @@
-package geekbrains.AndroidBasicLevel.PreviousRequests.Database;
+package geekbrains.AndroidBasicLevel.previousRequests.database;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-import geekbrains.AndroidBasicLevel.PreviousRequests.Dao.RequestDao;
-import geekbrains.AndroidBasicLevel.PreviousRequests.model.PreviousRequest;
+import geekbrains.AndroidBasicLevel.previousRequests.dao.RequestDao;
+import geekbrains.AndroidBasicLevel.previousRequests.model.PreviousRequest;
 
 @Database(entities = {PreviousRequest.class}, version = 1)
 public abstract class RequestDatabase extends RoomDatabase {

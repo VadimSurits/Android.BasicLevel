@@ -1,9 +1,9 @@
-package geekbrains.AndroidBasicLevel.PreviousRequests;
+package geekbrains.AndroidBasicLevel.previousRequests;
 
 import java.util.List;
 
-import geekbrains.AndroidBasicLevel.PreviousRequests.Dao.RequestDao;
-import geekbrains.AndroidBasicLevel.PreviousRequests.model.PreviousRequest;
+import geekbrains.AndroidBasicLevel.previousRequests.dao.RequestDao;
+import geekbrains.AndroidBasicLevel.previousRequests.model.PreviousRequest;
 
 public class PreviousRequestsSource {
 

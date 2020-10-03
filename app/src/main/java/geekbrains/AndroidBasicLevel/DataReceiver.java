@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
+import geekbrains.AndroidBasicLevel.forecastData.WeatherRequest;
 
 import static geekbrains.AndroidBasicLevel.MainActivity.TAG;
 

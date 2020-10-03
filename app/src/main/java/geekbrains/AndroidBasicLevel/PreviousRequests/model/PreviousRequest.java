@@ -1,4 +1,4 @@
-package geekbrains.AndroidBasicLevel.PreviousRequests.model;
+package geekbrains.AndroidBasicLevel.previousRequests.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

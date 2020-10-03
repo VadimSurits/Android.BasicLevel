@@ -28,10 +28,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
-import geekbrains.AndroidBasicLevel.PreviousRequests.PreviousRequestsActivity;
-import geekbrains.AndroidBasicLevel.PreviousRequests.RecyclerDataAdapter_for_PRActivity;
-import geekbrains.AndroidBasicLevel.PreviousRequests.model.PreviousRequest;
+import geekbrains.AndroidBasicLevel.forecastData.WeatherRequest;
+import geekbrains.AndroidBasicLevel.previousRequests.PreviousRequestsActivity;
+import geekbrains.AndroidBasicLevel.previousRequests.RecyclerDataAdapterForPRActivity;
+import geekbrains.AndroidBasicLevel.previousRequests.model.PreviousRequest;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements Constants {
 
-    Uri uri = Uri.parse("http://geekbrains.ru");
+    Uri uri = Uri.parse("https://geekbrains.ru");
 
     private static final float AbsoluteZero = -273.15f;
 
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
             temperature.setText(sharedPreferences.getString(APP_TEMPERATURE,""));
         }
         if(sharedPreferences.contains(APP_WETHERICON)){
-            getForecastIcon("http://openweathermap.org/img/wn/"
+            getForecastIcon("https://openweathermap.org/img/wn/"
                     + sharedPreferences.getString(APP_WETHERICON,"") + "@2x.png");
         }
         if(sharedPreferences.contains(APP_FORECASTDESCRIPTION)){
@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         uri = Uri.parse(saveIS.getString("URI"));
         forecastDescriptions.set(0, saveIS.getString("description"));
         receivedIcon = (String) saveIS.get("icon");
-        getForecastIcon("http://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
+        getForecastIcon("https://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
         cityImageUrl = saveIS.getString("cityImage");
         getCityImage(cityImageUrl);
     }
@@ -333,7 +333,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private void initRetrofit() {
         Retrofit retrofit;
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.openweathermap.org/") //Базовая часть адреса
+                .baseUrl("https://api.openweathermap.org/") //Базовая часть адреса
                 .addConverterFactory(GsonConverterFactory.create()) //Конвертер, необходимый для преобразования JSON'а в объекты
                 .build();
         openWeather = retrofit.create(OpenWeather.class); //Создаем объект, при помощи которого будем выполнять запросы
@@ -363,12 +363,12 @@ public class MainActivity extends AppCompatActivity implements Constants {
                             String receivedDescription = response.body().getWeather()[0].getDescription();
                             forecastDescriptions.set(0, receivedDescription);
                             receivedIcon = response.body().getWeather()[0].getIcon();
-                            getForecastIcon("http://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
+                            getForecastIcon("https://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
 
                             try{
                                 String currentDate = calendar.get(Calendar.DATE) + "." + calendar.get(Calendar.MONTH) + "."
                                         + calendar.get(Calendar.YEAR);
-                                RecyclerDataAdapter_for_PRActivity.dataSource.addPreviousRequest
+                                RecyclerDataAdapterForPRActivity.dataSource.addPreviousRequest
                                         (new PreviousRequest(chosenCity,currentDate,String.format("%.1f C", receivedTemperature)));
                             } catch(NullPointerException e){
                                 Log.e(TAG, "NullPointerException");

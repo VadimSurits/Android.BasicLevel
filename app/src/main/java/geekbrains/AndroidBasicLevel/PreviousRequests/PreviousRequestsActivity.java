@@ -1,4 +1,4 @@
-package geekbrains.AndroidBasicLevel.PreviousRequests;
+package geekbrains.AndroidBasicLevel.previousRequests;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,14 +17,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import geekbrains.AndroidBasicLevel.CityChoiceActivity;
 import geekbrains.AndroidBasicLevel.MainActivity;
-import geekbrains.AndroidBasicLevel.PreviousRequests.Dao.RequestDao;
 import geekbrains.AndroidBasicLevel.R;
 import geekbrains.AndroidBasicLevel.SettingsActivity;
+import geekbrains.AndroidBasicLevel.previousRequests.dao.RequestDao;
 
 public class PreviousRequestsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerView;
-    private RecyclerDataAdapter_for_PRActivity recyclerDataAdapter_for_prActivity;
+    private RecyclerDataAdapterForPRActivity recyclerDataAdapter_for_prActivity;
     public static PreviousRequestsSource previousRequestsSource;
 
     @Override
@@ -39,14 +39,14 @@ public class PreviousRequestsActivity extends AppCompatActivity implements Navig
 
     private void iniRecyclerView(){
         recyclerView = findViewById(R.id.recycler_view_for_HoR);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, true));
 
         RequestDao requestDao = App
                 .getInstance()
                 .getRequestDao();
         previousRequestsSource = new PreviousRequestsSource(requestDao);
 
-        recyclerDataAdapter_for_prActivity = new RecyclerDataAdapter_for_PRActivity(previousRequestsSource, this);
+        recyclerDataAdapter_for_prActivity = new RecyclerDataAdapterForPRActivity(previousRequestsSource, this);
         recyclerView.setAdapter(recyclerDataAdapter_for_prActivity);
     }
 

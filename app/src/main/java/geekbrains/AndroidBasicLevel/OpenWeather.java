@@ -1,6 +1,6 @@
 package geekbrains.AndroidBasicLevel;
 
-import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
+import geekbrains.AndroidBasicLevel.forecastData.WeatherRequest;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

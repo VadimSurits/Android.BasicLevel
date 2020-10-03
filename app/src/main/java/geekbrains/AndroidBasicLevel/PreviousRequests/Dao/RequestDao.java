@@ -1,4 +1,4 @@
-package geekbrains.AndroidBasicLevel.PreviousRequests.Dao;
+package geekbrains.AndroidBasicLevel.previousRequests.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -8,7 +8,7 @@ import androidx.room.Query;
 
 import java.util.List;
 
-import geekbrains.AndroidBasicLevel.PreviousRequests.model.PreviousRequest;
+import geekbrains.AndroidBasicLevel.previousRequests.model.PreviousRequest;
 
 
 @Dao

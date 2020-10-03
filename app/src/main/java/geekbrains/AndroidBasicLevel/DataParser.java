@@ -2,7 +2,7 @@ package geekbrains.AndroidBasicLevel;
 
 import android.annotation.SuppressLint;
 
-import geekbrains.AndroidBasicLevel.ForecastData.WeatherRequest;
+import geekbrains.AndroidBasicLevel.forecastData.WeatherRequest;
 
 class DataParser{
     private DataReceiver dataReceiver;

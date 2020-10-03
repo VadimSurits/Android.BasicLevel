@@ -1,11 +1,11 @@
-package geekbrains.AndroidBasicLevel.PreviousRequests;
+package geekbrains.AndroidBasicLevel.previousRequests;
 
 import android.app.Application;
 
 import androidx.room.Room;
 
-import geekbrains.AndroidBasicLevel.PreviousRequests.Dao.RequestDao;
-import geekbrains.AndroidBasicLevel.PreviousRequests.Database.RequestDatabase;
+import geekbrains.AndroidBasicLevel.previousRequests.dao.RequestDao;
+import geekbrains.AndroidBasicLevel.previousRequests.database.RequestDatabase;
 
 public class App extends Application {
 
