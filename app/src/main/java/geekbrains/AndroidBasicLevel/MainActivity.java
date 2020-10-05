@@ -1,10 +1,15 @@
 package geekbrains.AndroidBasicLevel;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,12 +20,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,6 +38,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import geekbrains.AndroidBasicLevel.broadcastReceivers.BatteryStateReceiver;
+import geekbrains.AndroidBasicLevel.broadcastReceivers.NetworkStateReceiver;
 import geekbrains.AndroidBasicLevel.forecastData.WeatherRequest;
 import geekbrains.AndroidBasicLevel.previousRequests.PreviousRequestsActivity;
 import geekbrains.AndroidBasicLevel.previousRequests.RecyclerDataAdapterForPRActivity;
@@ -77,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private final String APP_PRESSURE = "pressure";
     private final String APP_WIKIPEDIA = "wikipediaUrl";
     SharedPreferences sharedPreferences;
+    private NetworkStateReceiver networkStateReceiver = new NetworkStateReceiver();
+    private BatteryStateReceiver batteryStateReceiver = new BatteryStateReceiver();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -205,6 +219,14 @@ public class MainActivity extends AppCompatActivity implements Constants {
         if(sharedPreferences.contains(APP_WIKIPEDIA)){
             uri = Uri.parse(sharedPreferences.getString(APP_WIKIPEDIA,""));
         }
+
+        registerReceiver(networkStateReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        registerReceiver(batteryStateReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
+        initNotificationChannel("1");
+        initNotificationChannel("2");
+
+        initGetToken();
+        initNotificationChannel("3");
     }
 
     @Override
@@ -296,6 +318,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onDestroy(){
         super.onDestroy();
+        unregisterReceiver(networkStateReceiver);
+        unregisterReceiver(batteryStateReceiver);
     }
 
     @Override
@@ -364,7 +388,6 @@ public class MainActivity extends AppCompatActivity implements Constants {
                             forecastDescriptions.set(0, receivedDescription);
                             receivedIcon = response.body().getWeather()[0].getIcon();
                             getForecastIcon("https://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
-
                             try{
                                 String currentDate = calendar.get(Calendar.DATE) + "." + calendar.get(Calendar.MONTH) + "."
                                         + calendar.get(Calendar.YEAR);
@@ -396,4 +419,32 @@ public class MainActivity extends AppCompatActivity implements Constants {
                 .load(url)
                 .into(forecastIcon);
     }
+
+    private void initNotificationChannel(String channelId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager notificationManager = (NotificationManager)
+                    getSystemService(Context.NOTIFICATION_SERVICE);
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel channel = new NotificationChannel(channelId,"name",
+                    importance);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    private void initGetToken(){
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener
+                (new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(!task.isSuccessful()){
+                            Log.w("PushMessage","getInstanceId failed",
+                                    task.getException());
+                            return;
+                        }
+                        String token = task.getResult().getToken();
+                        Log.d("PushMessage","Token " + token);
+                    }
+                });
+    }
 }
+

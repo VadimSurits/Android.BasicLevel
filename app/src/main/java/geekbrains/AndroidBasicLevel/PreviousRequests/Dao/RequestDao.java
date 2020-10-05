@@ -23,10 +23,10 @@ public interface RequestDao {
     @Query("DELETE FROM previousrequest WHERE id = :id")
     void deleteRequestbyId(long id);
 
-    @Query("SELECT * FROM previousrequest")
+    @Query("SELECT id,city_name,date,temperature FROM previousrequest")
     List<PreviousRequest> getAllRequests();
 
-    @Query("SELECT * FROM previousrequest WHERE id = :id")
+    @Query("SELECT id,city_name,date,temperature FROM previousrequest WHERE id = :id")
     PreviousRequest getRequeestById(long id);
 
     @Query("SELECT COUNT() FROM previousrequest")
