@@ -20,12 +20,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -214,10 +219,14 @@ public class MainActivity extends AppCompatActivity implements Constants {
         if(sharedPreferences.contains(APP_WIKIPEDIA)){
             uri = Uri.parse(sharedPreferences.getString(APP_WIKIPEDIA,""));
         }
+
         registerReceiver(networkStateReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         registerReceiver(batteryStateReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
         initNotificationChannel("1");
         initNotificationChannel("2");
+
+        initGetToken();
+        initNotificationChannel("3");
     }
 
     @Override
@@ -379,7 +388,6 @@ public class MainActivity extends AppCompatActivity implements Constants {
                             forecastDescriptions.set(0, receivedDescription);
                             receivedIcon = response.body().getWeather()[0].getIcon();
                             getForecastIcon("https://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
-
                             try{
                                 String currentDate = calendar.get(Calendar.DATE) + "." + calendar.get(Calendar.MONTH) + "."
                                         + calendar.get(Calendar.YEAR);
@@ -422,4 +430,21 @@ public class MainActivity extends AppCompatActivity implements Constants {
             notificationManager.createNotificationChannel(channel);
         }
     }
+
+    private void initGetToken(){
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener
+                (new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if(!task.isSuccessful()){
+                            Log.w("PushMessage","getInstanceId failed",
+                                    task.getException());
+                            return;
+                        }
+                        String token = task.getResult().getToken();
+                        Log.d("PushMessage","Token " + token);
+                    }
+                });
+    }
 }
+

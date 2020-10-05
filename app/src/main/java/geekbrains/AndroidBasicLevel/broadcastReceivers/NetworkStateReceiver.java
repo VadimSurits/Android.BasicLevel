@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import androidx.core.app.NotificationCompat;
 
 import geekbrains.AndroidBasicLevel.R;
+import geekbrains.AndroidBasicLevel.previousRequests.App;
 
 public class NetworkStateReceiver extends BroadcastReceiver {
     private int messageId = 0;
@@ -24,8 +25,10 @@ public class NetworkStateReceiver extends BroadcastReceiver {
                 NotificationCompat.Builder builder =
                         new NotificationCompat.Builder(context,"2")
                         .setSmallIcon(R.drawable.ic_network_off)
-                        .setContentTitle("VS NETWORK WARNING")
-                        .setContentText("NETWORK IS OFF");
+                        .setContentTitle(App.getInstance().getResources().
+                                getString(R.string.noNetwork_notificationTitle))
+                        .setContentText(App.getInstance().getResources().
+                                getString(R.string.noNetwork_notificationText));
                 NotificationManager notificationManager = (NotificationManager) context.getSystemService
                         (Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(messageId++, builder.build());
