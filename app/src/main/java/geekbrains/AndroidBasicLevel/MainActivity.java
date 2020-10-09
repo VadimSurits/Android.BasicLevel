@@ -33,6 +33,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -107,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private static final int PERMISSION_REQUEST_CODE = 10;
     private double latitude;
     private double longitude;
+
+    private int messageId;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -249,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
         initGetToken();
         initNotificationChannel("3");
-
+        initNotificationChannel("4");
     }
 
     @Override
@@ -410,6 +413,11 @@ public class MainActivity extends AppCompatActivity implements Constants {
                             String receivedDescription = response.body().getWeather()[0].getDescription();
                             forecastDescriptions.set(0, receivedDescription);
                             receivedIcon = response.body().getWeather()[0].getIcon();
+                            if(receivedIcon.equals("09d") || receivedIcon.equals("09n") ||
+                                    receivedIcon.equals("13d") || receivedIcon.equals("13n") ||
+                                    receivedIcon.equals("50d") || receivedIcon.equals("50n")){
+                                badWeatherWarning();
+                            }
                             getForecastIcon("https://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
                             try{
                                 String currentDate = calendar.get(Calendar.DATE) + "." + calendar.get(Calendar.MONTH) + "."
@@ -567,6 +575,17 @@ public class MainActivity extends AppCompatActivity implements Constants {
                 }
             }
         }).start();
+    }
+
+    //Уведомления о плохой погоде
+    private void badWeatherWarning() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "4")
+                .setSmallIcon(R.drawable.ic_dangerous_weather)
+                .setContentTitle(getString(R.string.badWeatherWarning_notificationTitle))
+                .setContentText(getString(R.string.badWeatherWarning_notificationText));
+        NotificationManager notificationManager =
+                (NotificationManager) MainActivity.this.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(messageId++, builder.build());
     }
 }
 
