@@ -28,6 +28,7 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
         Button buttonEkaterinburg = findViewById(R.id.buttonEkaterinburg);
         Button buttonNovosibirsk = findViewById(R.id.buttonNovosibirsk);
         Button buttonKhabarovsk = findViewById(R.id.buttonKhabarovsk);
+        Button buttonDefineLocation = findViewById(R.id.buttonDefineLocation);
 
         editCityName.setOnKeyListener(new View.OnKeyListener(){
                public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -217,6 +218,27 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
                 intentResult.putExtra("CITY",editCityName.getText().toString());
                 setResult(RESULT_OK, intentResult);
                 intentResult.putExtra("URI", getString(R.string.UriKhabarovsk));
+                setResult(RESULT_OK, intentResult);
+                if (checkBoxWindSpeed.isChecked()) {
+                    intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                    setResult(RESULT_OK, intentResult);
+                }
+                if (checkBoxPressure.isChecked()) {
+                    intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                    setResult(RESULT_OK, intentResult);
+                }
+                finish();
+            }
+        });
+
+        buttonDefineLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editCityName.setText(R.string.searchCity);
+                Intent intentResult = new Intent();
+                intentResult.putExtra("CITY",editCityName.getText().toString());
+                setResult(RESULT_OK, intentResult);
+                intentResult.putExtra("URI", "https://geekbrains.ru");
                 setResult(RESULT_OK, intentResult);
                 if (checkBoxWindSpeed.isChecked()) {
                     intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());

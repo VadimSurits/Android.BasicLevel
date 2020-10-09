@@ -13,9 +13,6 @@ import com.google.firebase.messaging.RemoteMessage;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private int messageId;
 
-//    public MyFirebaseMessagingService() {
-//    }
-
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         Log.d("PushMessage", remoteMessage.getNotification().getBody());

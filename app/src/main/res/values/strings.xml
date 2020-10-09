@@ -12,6 +12,7 @@
     <string name="buttonEkaterinburg">Ekaterinburg</string>
     <string name="buttonNovosibirsk">Novosibirsk</string>
     <string name="buttonKhabarovsk">Khabarovsk</string>
+    <string name="buttonDefineLocation">Define my current location</string>
     <string name="checkBoxWindSpeed">Wind speed</string>
     <string name="checkBoxPressure">Pressure</string>
     <string name="Settings">Settings</string>
@@ -45,5 +46,9 @@
     <string name="noNetwork_notificationText">NETWORK IS OFF</string>
     <string name="lowBattery_notificationTitle">VS BATTERY WARNING</string>
     <string name="lowBattery_notificationText">BATTERY IS LOW</string>
+
+    <string name="searchCity">Searching city</string>
+
+
 
 </resources>

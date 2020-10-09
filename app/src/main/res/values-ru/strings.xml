@@ -13,6 +13,7 @@
     <string name="buttonEkaterinburg">Екатеринбург</string>
     <string name="buttonNovosibirsk">Новосибирск</string>
     <string name="buttonKhabarovsk">Хабаровск</string>
+    <string name="buttonDefineLocation">Определить мое текущее местоположение</string>
     <string name="checkBoxWindSpeed">Скорость ветра</string>
     <string name="checkBoxPressure">Давление</string>
     <string name="Settings">Настройки</string>
@@ -46,5 +47,7 @@
     <string name="noNetwork_notificationText">СЕТЕВОЕ ПОДКЛЮЧЕНИЕ ОТСУТСТВУЕТ</string>
     <string name="lowBattery_notificationTitle">VS BATTERY ПРЕДУПРЕЖДЕНИЕ</string>
     <string name="lowBattery_notificationText">НИЗКИЙ ЗАРЯД БАТАРЕИ</string>
+
+    <string name="searchCity">Ищу город</string>
 
 </resources>
