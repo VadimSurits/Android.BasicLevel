@@ -37,76 +37,76 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
                        String str = editCityName.getText().toString();
                        if (str.equals(getString(R.string.buttonMoscow))) {
                            Intent intentResult = new Intent();
-                           intentResult.putExtra("CITY", str);
+                           intentResult.putExtra(CITY, str);
                            setResult(RESULT_OK, intentResult);
-                           intentResult.putExtra("URI", getString(R.string.UriMoscow));
+                           intentResult.putExtra(URI, getString(R.string.UriMoscow));
                            setResult(RESULT_OK, intentResult);
                            if (checkBoxWindSpeed.isChecked()) {
-                               intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                               intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                                setResult(RESULT_OK, intentResult);
                            }
                            if (checkBoxPressure.isChecked()) {
-                               intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                               intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                                setResult(RESULT_OK, intentResult);
                            }
                            finish();
                        } else if (str.equals(getString(R.string.buttonSpb))) {
                            Intent intentResult = new Intent();
-                           intentResult.putExtra("CITY", str);
+                           intentResult.putExtra(CITY, str);
                            setResult(RESULT_OK, intentResult);
-                           intentResult.putExtra("URI", getString(R.string.UriSpb));
+                           intentResult.putExtra(URI, getString(R.string.UriSpb));
                            setResult(RESULT_OK, intentResult);
                            if (checkBoxWindSpeed.isChecked()) {
-                               intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                               intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                                setResult(RESULT_OK, intentResult);
                            }
                            if (checkBoxPressure.isChecked()) {
-                               intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                               intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                                setResult(RESULT_OK, intentResult);
                            }
                            finish();
                        } else if (str.equals(getString(R.string.buttonEkaterinburg))) {
                            Intent intentResult = new Intent();
-                           intentResult.putExtra("CITY", str);
+                           intentResult.putExtra(CITY, str);
                            setResult(RESULT_OK, intentResult);
-                           intentResult.putExtra("URI", getString(R.string.UriEkaterinburg));
+                           intentResult.putExtra(URI, getString(R.string.UriEkaterinburg));
                            setResult(RESULT_OK, intentResult);
                            if (checkBoxWindSpeed.isChecked()) {
-                               intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                               intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                                setResult(RESULT_OK, intentResult);
                            }
                            if (checkBoxPressure.isChecked()) {
-                               intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                               intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                                setResult(RESULT_OK, intentResult);
                            }
                            finish();
                        } else if (str.equals(getString(R.string.buttonNovosibirsk))) {
                            Intent intentResult = new Intent();
-                           intentResult.putExtra("CITY", str);
+                           intentResult.putExtra(CITY, str);
                            setResult(RESULT_OK, intentResult);
-                           intentResult.putExtra("URI", getString(R.string.UriNovosibirsk));
+                           intentResult.putExtra(URI, getString(R.string.UriNovosibirsk));
                            setResult(RESULT_OK, intentResult);
                            if (checkBoxWindSpeed.isChecked()) {
-                               intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                               intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                                setResult(RESULT_OK, intentResult);
                            }
                            if (checkBoxPressure.isChecked()) {
-                               intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                               intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                                setResult(RESULT_OK, intentResult);
                            }
                            finish();
                        } else if (str.equals(getString(R.string.buttonKhabarovsk))) {
                            Intent intentResult = new Intent();
-                           intentResult.putExtra("CITY", str);
+                           intentResult.putExtra(CITY, str);
                            setResult(RESULT_OK, intentResult);
-                           intentResult.putExtra("URI", getString(R.string.UriKhabarovsk));
+                           intentResult.putExtra(URI, getString(R.string.UriKhabarovsk));
                            setResult(RESULT_OK, intentResult);
                            if (checkBoxWindSpeed.isChecked()) {
-                               intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                               intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                                setResult(RESULT_OK, intentResult);
                            }
                            if (checkBoxPressure.isChecked()) {
-                               intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                               intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                                setResult(RESULT_OK, intentResult);
                            }
                            finish();
@@ -131,16 +131,16 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
             public void onClick(View view) {
                 editCityName.setText(R.string.buttonMoscow);
                 Intent intentResult = new Intent();
-                intentResult.putExtra("CITY",editCityName.getText().toString());
+                intentResult.putExtra(CITY,editCityName.getText().toString());
                 setResult(RESULT_OK, intentResult);
-                intentResult.putExtra("URI", getString(R.string.UriMoscow));
+                intentResult.putExtra(URI, getString(R.string.UriMoscow));
                 setResult(RESULT_OK, intentResult);
                 if (checkBoxWindSpeed.isChecked()) {
-                    intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                    intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 if (checkBoxPressure.isChecked()) {
-                    intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                    intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 finish();
@@ -152,16 +152,16 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
             public void onClick(View view) {
                 editCityName.setText(R.string.buttonSpb);
                 Intent intentResult = new Intent();
-                intentResult.putExtra("CITY",editCityName.getText().toString());
+                intentResult.putExtra(CITY,editCityName.getText().toString());
                 setResult(RESULT_OK, intentResult);
-                intentResult.putExtra("URI", getString(R.string.UriSpb));
+                intentResult.putExtra(URI, getString(R.string.UriSpb));
                 setResult(RESULT_OK, intentResult);
                 if (checkBoxWindSpeed.isChecked()) {
-                    intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                    intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 if (checkBoxPressure.isChecked()) {
-                    intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                    intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 finish();
@@ -173,16 +173,16 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
             public void onClick(View view) {
                 editCityName.setText(R.string.buttonEkaterinburg);
                 Intent intentResult = new Intent();
-                intentResult.putExtra("CITY",editCityName.getText().toString());
+                intentResult.putExtra(CITY,editCityName.getText().toString());
                 setResult(RESULT_OK, intentResult);
-                intentResult.putExtra("URI", getString(R.string.UriEkaterinburg));
+                intentResult.putExtra(URI, getString(R.string.UriEkaterinburg));
                 setResult(RESULT_OK, intentResult);
                 if (checkBoxWindSpeed.isChecked()) {
-                    intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                    intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 if (checkBoxPressure.isChecked()) {
-                    intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                    intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 finish();
@@ -194,16 +194,16 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
             public void onClick(View view) {
                 editCityName.setText(R.string.buttonNovosibirsk);
                 Intent intentResult = new Intent();
-                intentResult.putExtra("CITY",editCityName.getText().toString());
+                intentResult.putExtra(CITY,editCityName.getText().toString());
                 setResult(RESULT_OK, intentResult);
-                intentResult.putExtra("URI", getString(R.string.UriNovosibirsk));
+                intentResult.putExtra(URI, getString(R.string.UriNovosibirsk));
                 setResult(RESULT_OK, intentResult);
                 if (checkBoxWindSpeed.isChecked()) {
-                    intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                    intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 if (checkBoxPressure.isChecked()) {
-                    intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                    intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 finish();
@@ -215,16 +215,16 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
             public void onClick(View view) {
                 editCityName.setText(R.string.buttonKhabarovsk);
                 Intent intentResult = new Intent();
-                intentResult.putExtra("CITY",editCityName.getText().toString());
+                intentResult.putExtra(CITY,editCityName.getText().toString());
                 setResult(RESULT_OK, intentResult);
-                intentResult.putExtra("URI", getString(R.string.UriKhabarovsk));
+                intentResult.putExtra(URI, getString(R.string.UriKhabarovsk));
                 setResult(RESULT_OK, intentResult);
                 if (checkBoxWindSpeed.isChecked()) {
-                    intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                    intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 if (checkBoxPressure.isChecked()) {
-                    intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                    intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 finish();
@@ -236,16 +236,16 @@ public class CityChoiceActivity extends AppCompatActivity implements Constants {
             public void onClick(View view) {
                 editCityName.setText(R.string.searchCity);
                 Intent intentResult = new Intent();
-                intentResult.putExtra("CITY",editCityName.getText().toString());
+                intentResult.putExtra(CITY,editCityName.getText().toString());
                 setResult(RESULT_OK, intentResult);
-                intentResult.putExtra("URI", "https://geekbrains.ru");
+                intentResult.putExtra(URI, "https://geekbrains.ru");
                 setResult(RESULT_OK, intentResult);
                 if (checkBoxWindSpeed.isChecked()) {
-                    intentResult.putExtra("WIND_SPEED", checkBoxWindSpeed.getText().toString());
+                    intentResult.putExtra(WIND_SPEED, checkBoxWindSpeed.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 if (checkBoxPressure.isChecked()) {
-                    intentResult.putExtra("PRESSURE", checkBoxPressure.getText().toString());
+                    intentResult.putExtra(PRESSURE, checkBoxPressure.getText().toString());
                     setResult(RESULT_OK, intentResult);
                 }
                 finish();

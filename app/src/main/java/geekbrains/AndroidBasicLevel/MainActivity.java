@@ -523,7 +523,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
             return;
         }
 
-        locationManager.requestLocationUpdates(provider, 0, 0, new LocationListener() {
+        locationManager.requestLocationUpdates(provider, 60000, 1000, new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 latitude = location.getLatitude();
