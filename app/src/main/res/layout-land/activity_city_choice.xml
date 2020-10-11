@@ -145,6 +145,18 @@
         app:layout_constraintStart_toStartOf="@+id/editCityNameLayout"
         app:layout_constraintTop_toBottomOf="@+id/buttonNovosibirsk" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonDefineLocation"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:text="@string/buttonDefineLocation"
+        app:layout_constraintTop_toTopOf="@id/buttonEkaterinburg"
+        app:layout_constraintBottom_toBottomOf="@id/buttonEkaterinburg"
+        app:layout_constraintEnd_toEndOf="@+id/editCityNameLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/buttonEkaterinburg" />
+
     <CheckBox
         android:id="@+id/checkBoxWindSpeed"
         android:layout_width="170dp"

@@ -1,5 +1,6 @@
 package geekbrains.AndroidBasicLevel;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -7,6 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Criteria;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -21,11 +29,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,6 +45,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -92,6 +105,13 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private NetworkStateReceiver networkStateReceiver = new NetworkStateReceiver();
     private BatteryStateReceiver batteryStateReceiver = new BatteryStateReceiver();
 
+    private static final int PERMISSION_REQUEST_CODE = 10;
+    private double latitude;
+    private double longitude;
+
+    private int messageId;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -134,6 +154,10 @@ public class MainActivity extends AppCompatActivity implements Constants {
         if (cityName.getText().equals(getString(R.string.buttonKhabarovsk))) {
             requestRetrofit(CITY_KHV,WEATHER_API_KEY);
             getCityImage("https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL0toYWJhcm92c2svMTkuanBnP19faWQ9MTA4NTg5.jpeg");
+        }
+        if(cityName.getText().equals(getString(R.string.searchCity))){
+            locateCity(new LatLng(latitude,longitude));
+            picture.setImageResource(R.drawable.ic_sun);
         }
     }
 
@@ -192,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
         recyclerView.setAdapter(recyclerDataAdapter);
 
         initRetrofit();
+        requestPermissions();
 
         sharedPreferences = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         if(sharedPreferences.contains(APP_CITYNAME)){
@@ -227,6 +252,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
         initGetToken();
         initNotificationChannel("3");
+        initNotificationChannel("4");
     }
 
     @Override
@@ -387,6 +413,11 @@ public class MainActivity extends AppCompatActivity implements Constants {
                             String receivedDescription = response.body().getWeather()[0].getDescription();
                             forecastDescriptions.set(0, receivedDescription);
                             receivedIcon = response.body().getWeather()[0].getIcon();
+                            if(receivedIcon.equals("09d") || receivedIcon.equals("09n") ||
+                                    receivedIcon.equals("13d") || receivedIcon.equals("13n") ||
+                                    receivedIcon.equals("50d") || receivedIcon.equals("50n")){
+                                badWeatherWarning();
+                            }
                             getForecastIcon("https://openweathermap.org/img/wn/" + receivedIcon + "@2x.png");
                             try{
                                 String currentDate = calendar.get(Calendar.DATE) + "." + calendar.get(Calendar.MONTH) + "."
@@ -445,6 +476,116 @@ public class MainActivity extends AppCompatActivity implements Constants {
                         Log.d("PushMessage","Token " + token);
                     }
                 });
+    }
+
+    //1 шаг геолокации: запросили разрешения. Если они есть, то перешли к получению координат(шаг 4).
+    //Если нет, то запрашиваем их дополнительно(шаг 2).
+    private void requestPermissions() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            getCoordinates();
+        } else {
+            requestLocationPermissions();
+        }
+    }
+
+    //2 шаг геолокации: дополнительно запрашиваем разрешения.
+    private void requestLocationPermissions() {
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    },
+                    PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    //3 шаг геолокации: получаем результат дополнительного запроса разрешений.
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length == 2 &&
+                    (grantResults[0] == PackageManager.PERMISSION_GRANTED || grantResults[1] == PackageManager.PERMISSION_GRANTED)) {
+                getCoordinates();
+            }
+        }
+    }
+
+    //4 шаг геолокации: получаем координаты.
+    private void getCoordinates() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        String provider = locationManager.getBestProvider(criteria, true);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        locationManager.requestLocationUpdates(provider, 60000, 1000, new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+            }
+        });
+    }
+
+    //Определяем текущий город и адрес, подготавливаем нужные поля и делаем requestRetrofit
+    //При попытке запускать requestRetrofit из onActivityResult (как это сделано для 5 городов)
+    // метод почему-то не срабатывал, при запуске из этого метода - все заработало.
+    private void locateCity(final LatLng location) {
+        final Geocoder geocoder = new Geocoder(MainActivity.this);
+        // Поскольку geocoder работает по интернету, создадим отдельный поток
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final List<Address> addresses = geocoder.getFromLocation(location.latitude,
+                            location.longitude, 1);
+                    addresses.get(0).getAddressLine(0);
+                    cityName.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            String city = addresses.get(0).getLocality();
+                            String countryCode = addresses.get(0).getCountryCode();
+                            String locatedCity = city + "," + countryCode.toLowerCase();
+                            chosenCity = city;
+                            cityName.setText(city);
+                            Log.i(TAG, "Address: " + locatedCity);
+                            Log.i(TAG, "addresses.get(0): " + addresses.get(0));
+                            requestRetrofit(locatedCity,WEATHER_API_KEY);
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    //Уведомления о плохой погоде
+    private void badWeatherWarning() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "4")
+                .setSmallIcon(R.drawable.ic_dangerous_weather)
+                .setContentTitle(getString(R.string.badWeatherWarning_notificationTitle))
+                .setContentText(getString(R.string.badWeatherWarning_notificationText));
+        NotificationManager notificationManager =
+                (NotificationManager) MainActivity.this.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(messageId++, builder.build());
     }
 }
 

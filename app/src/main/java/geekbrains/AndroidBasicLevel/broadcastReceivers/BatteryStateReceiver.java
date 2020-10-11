@@ -11,7 +11,7 @@ import geekbrains.AndroidBasicLevel.R;
 import geekbrains.AndroidBasicLevel.previousRequests.App;
 
 public class BatteryStateReceiver extends BroadcastReceiver {
-    private int messageId = 0;
+    private int messageId;
 
     @Override
     public void onReceive(Context context, Intent intent) {
