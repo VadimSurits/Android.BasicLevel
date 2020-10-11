@@ -37,6 +37,11 @@ import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -67,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
     Uri uri = Uri.parse("https://geekbrains.ru");
 
+    // Используется, чтобы определить результат Activity регистрации через
+    // Google
+    private static final int RC_SIGN_IN = 40404;
+
     private static final float AbsoluteZero = -273.15f;
 
     private RecyclerView recyclerView;
@@ -76,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements Constants {
 
     private Toolbar toolbar;
 
-    final static String TAG = "WEATHER";
+    final static String TAG = "VS WEATHER";
     private TextView cityName;
     TextView temperature;
     TextView pressure;
@@ -110,6 +119,9 @@ public class MainActivity extends AppCompatActivity implements Constants {
     private double longitude;
 
     private int messageId;
+
+    // Клиент для регистрации пользователя через Google
+    private GoogleSignInClient googleSignInClient;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -159,12 +171,36 @@ public class MainActivity extends AppCompatActivity implements Constants {
             locateCity(new LatLng(latitude,longitude));
             picture.setImageResource(R.drawable.ic_sun);
         }
+
+        // Получаем результаты аутентификации от окна регистрации пользователя
+        if(requestCode == RC_SIGN_IN){
+            // Когда сюда возвращается Task, результаты аутентификации уже
+            // готовы
+            Task<GoogleSignInAccount> task =
+                    GoogleSignIn. getSignedInAccountFromIntent (data);
+            handleSignInResult(task);
+        }
+
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Конфигурация запроса на регистрацию пользователя, чтобы получить
+        // идентификатор пользователя, его почту и основной профайл
+        // (регулируется параметром)
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Получаем клиента для регистрации и данные по клиенту
+        googleSignInClient = GoogleSignIn.getClient(this,gso);
+        signIn();
+
+
 
         dlgBuilder = new DialogBuilderFragment();
 
@@ -586,6 +622,25 @@ public class MainActivity extends AppCompatActivity implements Constants {
         NotificationManager notificationManager =
                 (NotificationManager) MainActivity.this.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(messageId++, builder.build());
+    }
+
+    // Инициируем регистрацию пользователя
+    private void signIn(){
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    // Получаем данные пользователя
+    private void handleSignInResult(Task<GoogleSignInAccount>completedTask){
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            Log.w(TAG,"signInResult: successfull");
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure
+            // reason. Please refer to the GoogleSignInStatusCodes class
+            // reference for more information.
+            Log.w(TAG,"signInResult:failed code=" + e.getStatusCode());
+        }
     }
 }
 
